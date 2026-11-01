@@ -1,0 +1,167 @@
+{
+  "schema_version": 1,
+  "prepared_date": "2026-11-01",
+  "new_numerical_evaluations": 0,
+  "hardware_context": {
+    "reported_machine": "2023 Mac Studio, Apple M2 Ultra, 128 GB memory",
+    "reported_os": "macOS Sequoia 15.6.1",
+    "reported_duration": "approximately two weeks",
+    "reported_workload": "Full model-output generation without precomputed intermediate simulation output",
+    "source_id": "hardware-and-workflow"
+  },
+  "local_machine": "Eight-core Apple M3 MacBook Air",
+  "combined_dimension_reduction_speedup_measured": false,
+  "source_records": {
+    "hardware-and-workflow": {
+      "record_sha256": "a8667876f1905e0e8ccb153528850ce146e31f2a3ce3f0b77ca429f0ed686094"
+    },
+    "re-batch": {
+      "record_sha256": "366d3f2e71f2a11ea375b30c55b418851393847accb23d855cbc5cbaf029bc0a"
+    },
+    "de-batch": {
+      "record_sha256": "ce3039116afce33257cb4c8aa73ec7746bde7dcf66555e6998f7d07dd9d5399a"
+    },
+    "original-local-baseline": {
+      "record_sha256": "366d3f2e71f2a11ea375b30c55b418851393847accb23d855cbc5cbaf029bc0a"
+    },
+    "re-direct": {
+      "record_sha256": "a121cc106ab5d9d7c149dc14773106693290340a5a2135706a5612689b37ecb6"
+    },
+    "de-direct": {
+      "record_sha256": "d7e48e4269af48183bafd798776cd1f5a73dcb87b2b157e2859be6352fc447e1"
+    }
+  },
+  "development_stage_comparisons": {
+    "RE": {
+      "points": 28,
+      "reference": "Our earlier accelerated 625-state interval-guard implementation",
+      "successor": "State-collapsed active-update action-envelope implementation",
+      "reference_wall_seconds": 1902.492909,
+      "successor_wall_seconds": 31.025393,
+      "wall_ratio": 61.320509590321706,
+      "source_id": "re-batch"
+    },
+    "DE": {
+      "points": 8,
+      "reference": "Our earlier conservative full-action refactor",
+      "successor": "Action-envelope successor-local implementation",
+      "reference_wall_seconds": 2341.8048562520016,
+      "successor_wall_seconds": 156.44980679300716,
+      "wall_ratio": 14.968410023991627,
+      "source_id": "de-batch"
+    }
+  },
+  "original_local_baseline_comparisons": {
+    "RE": {
+      "benchmark": "One direct evaluator call at the fixed complete anchor vector",
+      "parameters": [
+        0.92428828059544,
+        0.09642701059548,
+        3.489597117955886,
+        0.075000002980232,
+        0.177055818791029,
+        0.008002980164964,
+        0.076392721853193,
+        0.100000001490116,
+        0.389800274254465
+      ],
+      "parameter_hex": [
+        "0x1.d93c5042778b8p-1",
+        "0x1.8af70c8f568eap-4",
+        "0x1.beab1e4ceb0eap+1",
+        "0x1.333333fffffefp-4",
+        "0x1.6a9c3dba31182p-3",
+        "0x1.063ddd0a1e8acp-7",
+        "0x1.38e7932030b1fp-4",
+        "0x1.999999ffffff7p-4",
+        "0x1.8f27cd97943b7p-2"
+      ],
+      "original_seconds": 1258.2728,
+      "original_timing_aggregation": "One recorded original-source execution",
+      "original_threads": 36,
+      "original_solver_sha256": "827f5fb193a983273e3dfcf887d0440d04de35944786a9ad88fd596a37fda8dd",
+      "optimized_seconds": 0.6422507909883279,
+      "optimized_timing_aggregation": "Median of three recorded direct evaluations",
+      "optimized_threads": 8,
+      "optimized_solver_sha256": "2f6aa224d672dadbdfb3dd0d98e15a83439ee00ad629d2cd9211f515c132fda4",
+      "wall_ratio": 1959.1611527075058,
+      "original_source_id": "original-local-baseline",
+      "optimized_source_id": "re-direct",
+      "outer_parameter_profiling_used": false,
+      "optimized_individual_observations": "Not retained in this compact source record; three-observation median is retained.",
+      "additional_original_seconds_reported_rounded": 873.49,
+      "original_observation_ratio_range": [
+        1360.0450357652803,
+        1959.1611527075058
+      ],
+      "additional_observation_source_id": "original-local-baseline"
+    },
+    "DE": {
+      "benchmark": "One direct evaluator call at the fixed complete anchor vector",
+      "parameters": [
+        0.913384728899387,
+        0.670470014748329,
+        0.251194290992103,
+        4.022727572501791,
+        0.155165777739315,
+        0.233375106194904,
+        0.006377651836837,
+        0.011605602803207,
+        0.108761419006566,
+        0.677960774768015
+      ],
+      "parameter_hex": [
+        "0x1.d3a729c693cfap-1",
+        "0x1.5747d88495de3p-1",
+        "0x1.01391383030fcp-2",
+        "0x1.01745e592735dp+2",
+        "0x1.3dc78e26ca442p-3",
+        "0x1.ddf3c486760bdp-3",
+        "0x1.a1f73e10825dfp-8",
+        "0x1.7c4ada3ebce84p-7",
+        "0x1.bd7c9d1b32310p-4",
+        "0x1.5b1dacb732eaap-1"
+      ],
+      "original_seconds": 792.1285,
+      "original_timing_aggregation": "One recorded original-source execution",
+      "original_threads": 36,
+      "original_solver_sha256": "c02ce65275b1ef6af422a67da43187e794717a3d08be54543beb2c45d6f61927",
+      "optimized_seconds": 6.961757583019789,
+      "optimized_timing_aggregation": "Median of three recorded direct evaluations",
+      "optimized_threads": 8,
+      "optimized_solver_sha256": "9c6fbd4b678171666982572c442199e43a69a66f30f2b3ea0d05c8291109594b",
+      "wall_ratio": 113.78283293461072,
+      "original_source_id": "original-local-baseline",
+      "optimized_source_id": "de-direct",
+      "outer_parameter_profiling_used": false,
+      "optimized_wall_observations": [
+        5.293285874999128,
+        7.492780665983446,
+        6.961757583019789
+      ],
+      "additional_original_seconds_reported_rounded": 794.42,
+      "original_observation_ratio_range": [
+        113.78283293461072,
+        114.11198831996758
+      ],
+      "additional_observation_source_id": "original-local-baseline"
+    }
+  },
+  "baseline_comparison_scope": "Original unmodified solver source versus the current direct implementation on the same MacBook Air M3, at identical complete parameter bits and fixed inputs with full numerical settings. Existing timings from different dates, not interleaved original/current pairs. Ratios include thread configuration and all direct implementation changes; no outer-search dimension multiplier is included.",
+  "baseline_input_sha256": {
+    "Asimshocks.txt": "2e7f75d3761d1703af6a0de46b0eb22cb57915a8281d1af16bb163810ce8b916",
+    "zfirmshocks.txt": "b8544dc180754f548ba2bb36714fd0c2cdcb74f7ee0bbb40e1b222f68d399a4c",
+    "upifirmshocks1.txt": "241c76d4cff6ae6ad34b33fc060e47a360cb1d224f02a76ed96f2e83dafb1f9c",
+    "upifirmshocks2.txt": "bd74acb88b12842fa77446a7cd7922f7b619f756f8c6b976e2ab96dd228145b5",
+    "_GMMdatamom.txt": "0db4d0af53ade4b66d14bbfdc8338ad4857797ab6df9631134b99f8ca1d26daf",
+    "_GMMdatawgt.txt": "0222ec1525189cd826deb6b0677e02ceff6fc8153d2b775509a4b16e8f4631ef"
+  },
+  "baseline_fidelity_controls": {
+    "dfmaxit": 50,
+    "polmaxit": 20,
+    "accelmaxit": 100,
+    "distmaxit": 1500,
+    "disttol": 1e-06,
+    "poltol": 0.0001
+  }
+}

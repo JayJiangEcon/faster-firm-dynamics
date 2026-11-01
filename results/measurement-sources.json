@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "measurement_dates": [
+    "2026-09-01",
+    "2026-09-05"
+  ],
+  "environment": {
+    "host": "Apple M3; macOS 15.7.7; GNU Fortran 14.2.0",
+    "threads": 8,
+    "compiler_flags": [
+      "-O3",
+      "-funroll-loops",
+      "-fopenmp",
+      "-m64"
+    ],
+    "compiler_sha256": "9fdae40fe125b8d59936e58f26d3888f7ccfabd7b11c8c9354214d114da76f6e"
+  },
+  "baseline_source_sha256": {
+    "RE": {
+      "base_lib.f90": "927d2f1fe6b57debed8a394ec05989173a8b750dfb62a31b5689b10ae1d168e0",
+      "diag_firms_solve.f90": "827f5fb193a983273e3dfcf887d0440d04de35944786a9ad88fd596a37fda8dd"
+    },
+    "DE": {
+      "base_lib.f90": "927d2f1fe6b57debed8a394ec05989173a8b750dfb62a31b5689b10ae1d168e0",
+      "diag_firms_solve.f90": "c02ce65275b1ef6af422a67da43187e794717a3d08be54543beb2c45d6f61927"
+    }
+  },
+  "measured_solver_sha256": {
+    "RE": {
+      "direct": "2f6aa224d672dadbdfb3dd0d98e15a83439ee00ad629d2cd9211f515c132fda4",
+      "sigma-profile": "1a86c17df05be7dd3167f24fa32903b3cbb3877ddfcffcd5ae1b011bae5a1db9"
+    },
+    "DE": {
+      "direct": "9c6fbd4b678171666982572c442199e43a69a66f30f2b3ea0d05c8291109594b",
+      "sigma-profile": "ff548990fc9a6e7d614d118a9c630772423053b58d46730318fb99d2cc749b7b"
+    }
+  },
+  "runtime_input_sha256": {
+    "Asimshocks.txt": "2e7f75d3761d1703af6a0de46b0eb22cb57915a8281d1af16bb163810ce8b916",
+    "zfirmshocks.txt": "b8544dc180754f548ba2bb36714fd0c2cdcb74f7ee0bbb40e1b222f68d399a4c",
+    "upifirmshocks1.txt": "241c76d4cff6ae6ad34b33fc060e47a360cb1d224f02a76ed96f2e83dafb1f9c",
+    "upifirmshocks2.txt": "bd74acb88b12842fa77446a7cd7922f7b619f756f8c6b976e2ab96dd228145b5",
+    "_GMMdatamom.txt": "0db4d0af53ade4b66d14bbfdc8338ad4857797ab6df9631134b99f8ca1d26daf",
+    "_GMMdatawgt.txt": "0222ec1525189cd826deb6b0677e02ceff6fc8153d2b775509a4b16e8f4631ef"
+  },
+  "scope": "Source identities for existing performance measurements; packaged source identities are in integrated-manifest.json."
+}

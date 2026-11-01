@@ -1,0 +1,377 @@
+{
+  "schema_version": 1,
+  "preparation_date": "2026-11-01",
+  "new_numerical_evaluations": 0,
+  "purpose": "Selected existing method-level timing and numerical-agreement measurements supporting the README.",
+  "timing_convention": "Predecessor time divided by successor time; each comparison has its own baseline. Ratios are not cumulative.",
+  "techniques": {
+    "re-state-collapse": {
+      "source_ids": [
+        "re-collapse",
+        "early-re-kernels"
+      ],
+      "states_before": 625,
+      "states_after": 25,
+      "wall_seconds_before": 1902.492909,
+      "wall_seconds_after": 64.800684,
+      "aggregation": "Historical 28-point batch totals at full numerical settings",
+      "agreement": {
+        "parameter_vectors": 28,
+        "moment_cells": 476,
+        "bitwise_equal_moment_cells": 402,
+        "maximum_absolute_moment_difference": 5.204170427930421e-18,
+        "maximum_absolute_raw_q_difference": 3.469446951953614e-17,
+        "complete_rank_order_equal": true
+      },
+      "reference_implementation": "Our earlier accelerated 625-state interval-guard implementation",
+      "reference_is_original_source": false
+    },
+    "re-active-updates": {
+      "source_ids": [
+        "early-re-kernels"
+      ],
+      "wall_seconds_before": 64.800684,
+      "wall_seconds_after": 55.064905,
+      "policy_seconds_before": 52.930743,
+      "policy_seconds_after": 43.354471,
+      "mean_live_actions": 233.0226,
+      "total_actions": 900,
+      "points": 28,
+      "moment_cells": 476,
+      "moment_bit_mismatches": 0,
+      "raw_q_bit_mismatches": 0,
+      "ranking_equal": true
+    },
+    "re-action-envelope": {
+      "source_ids": [
+        "early-re-kernels"
+      ],
+      "wall_seconds_before": 55.064905,
+      "wall_seconds_after": 31.025393,
+      "policy_seconds_before": 43.354471,
+      "policy_seconds_after": 19.099317,
+      "points": 28,
+      "moment_cells": 476,
+      "moment_bit_mismatches": 0,
+      "raw_q_bit_mismatches": 0,
+      "ranking_equal": true
+    },
+    "de-reachable-updates": {
+      "source_ids": [
+        "de-reachability"
+      ],
+      "anchor_wall_seconds_before": [
+        22.16,
+        21.924
+      ],
+      "anchor_wall_seconds_after": [
+        10.158,
+        9.645
+      ],
+      "anchor_design": "Two pairs with reversed execution order",
+      "four_point_wall_seconds_before": [
+        22.963,
+        25.101,
+        30.386,
+        32.369
+      ],
+      "four_point_wall_seconds_after": [
+        9.504,
+        9.983,
+        10.34,
+        10.215
+      ],
+      "four_point_design": "Predefined points, sequential timing",
+      "stored_points": 31,
+      "stored_moment_cells": 527,
+      "stored_moment_bit_mismatches": 0,
+      "independent_design": {
+        "points": 8,
+        "sobol_seed": 20260902,
+        "support": "Coordinatewise min/max box of the 31 fixed reference vectors",
+        "complete_array_entries": 22500000,
+        "moment_cells": 136,
+        "total_mismatch_count": 0,
+        "comparison_scope": "Conservative implementation versus action-envelope plus successor-local updates",
+        "separate_processes": true,
+        "calls_per_process": 1
+      },
+      "mutation_detected": true,
+      "fresh_source_restored_equality": true
+    },
+    "de-sparse-winner": {
+      "source_ids": [
+        "de-sparse"
+      ],
+      "eight_point": {
+        "candidate_count": 8,
+        "moment_cells_compared": 136,
+        "complete_array_entries_compared": 22500000,
+        "total_mismatch_count": 0,
+        "fresh_authority_candidate_wall_seconds_sum": 151.48155979097646,
+        "fresh_experimental_candidate_wall_seconds_sum": 110.92661524900177,
+        "observed_speedup": 1.3656015686671703
+      },
+      "stored_points": {
+        "candidate_count": 31,
+        "parameter_bit_mismatches": 0,
+        "moment_cells_compared": 527,
+        "moment_bit_mismatches": 0
+      },
+      "profile": {
+        "authority_median_wall_seconds": 10.738312749992474,
+        "experimental_median_wall_seconds": 7.89222824999888,
+        "wall_speedup": 1.36062,
+        "authority_median_policy_seconds": 9.754199028015137,
+        "experimental_median_policy_seconds": 6.791467905044556,
+        "policy_speedup": 1.43624,
+        "authority_median_action_seconds": 5.617816925048828,
+        "experimental_median_action_seconds": 2.8793132305145264,
+        "action_speedup": 1.9511,
+        "authority_median_howard_seconds": 3.1448259353637695,
+        "experimental_median_howard_seconds": 2.9991800785064697
+      },
+      "profile_sample_definition": "Anchor and sigma_pi one binary64 step below and above anchor, with unchanged policies",
+      "mutation": {
+        "expectation_met": true,
+        "total_mismatch_count": 8,
+        "moment_bit_mismatches": 3,
+        "raw_q_bit_equal": false,
+        "changed_complete_arrays": [
+          "kbpolind",
+          "Vtheta",
+          "Vthetaold",
+          "qmat"
+        ],
+        "unchanged_complete_arrays": [
+          "dfpolind"
+        ],
+        "fresh_tracked_source_restored_baseline_hashes": true
+      }
+    },
+    "de-certified-skipping": {
+      "source_ids": [
+        "de-lazy"
+      ],
+      "points": 2,
+      "complete_array_entries_compared": 5625000,
+      "complete_output_byte_equal": true,
+      "anchor_skip_share": 0.34456368,
+      "eta_k_minus_one_ulp_skip_share": 0.34182897,
+      "order_balanced_anchor_speedup": 1.2057428574803137,
+      "two_point_speedup": 1.0773922299159624,
+      "instrumented_action_speedup": 1.2208455086585657
+    },
+    "de-grouped-howard": {
+      "source_ids": [
+        "de-grouped-howard"
+      ],
+      "points": 5,
+      "complete_array_entries_compared": 14062500,
+      "complete_array_and_output_mismatches": 0,
+      "fresh_three_point_parent_candidate_wall_seconds": [
+        8.471147999996901,
+        7.4525946250068955,
+        7.482803874998353
+      ],
+      "fresh_three_point_candidate_wall_seconds": [
+        7.929188999987673,
+        8.215558084004442,
+        8.345423332997598
+      ],
+      "fresh_three_point_parent_wall_sum_seconds": 23.40654650000215,
+      "fresh_three_point_candidate_wall_sum_seconds": 24.490170416989713,
+      "fresh_three_point_sequential_speedup": 0.955752700020584,
+      "interleaved_parent_wall_seconds": [
+        9.03,
+        10.03,
+        10.37
+      ],
+      "interleaved_candidate_wall_seconds": [
+        8.25,
+        7.41,
+        15.1
+      ],
+      "interleaved_raw_median_wall_speedup": 1.2157575757575756,
+      "interleaved_paired_median_wall_speedup": 1.0945454545454545,
+      "interleaved_median_value_push_speedup": 1.3827612418350035,
+      "timing_limit": "host had substantial unrelated load and the final candidate timing was a clear load spike; performance is modest and noisy",
+      "mutation_sensitivity": {
+        "temporary_change": "multiplied the first pairrun accumulator FMA result by 1.000000000000001d0 in a temporary generated-source copy",
+        "detected_mismatch_files": [
+          "GMMmodelmom.txt",
+          "RCC_Vtheta.bin",
+          "RCC_Vthetaold.bin",
+          "RCC_kbpolind.bin"
+        ],
+        "comparator_imports_solver": false,
+        "fresh_tracked_source_restore_all_files_byte_equal": true
+      },
+      "congested_retest_20260904": {
+        "role": "performance diagnostic only; not an idle-host benchmark",
+        "design": "five balanced interleaved anchor pairs, identical released inputs and eight OpenMP threads",
+        "parent_wall_seconds": [
+          7.23,
+          9.39,
+          10.18,
+          9.66,
+          12.17
+        ],
+        "candidate_wall_seconds": [
+          6.72,
+          7.45,
+          8.47,
+          8.11,
+          17.38
+        ],
+        "parent_wall_median_seconds": 9.66,
+        "candidate_wall_median_seconds": 8.11,
+        "median_wall_speedup": 1.1911220715166462,
+        "paired_wall_speedups": [
+          1.0758928571428572,
+          1.2604026845637584,
+          1.201889020070838,
+          1.1911220715166462,
+          0.7002301495972383
+        ],
+        "paired_wall_speedup_median": 1.1911220715166462,
+        "parent_cpu_median_seconds": 31.21,
+        "candidate_cpu_median_seconds": 28.14,
+        "median_cpu_time_reduction_factor": 1.1090973702914002,
+        "machine_state": {
+          "initial_load_average_1m": 18.43,
+          "final_load_average_1m": 19.27,
+          "initial_spotlight_total_cpu_percent": 137.1,
+          "observed_spotlight_total_cpu_percent_range": [
+            87.0,
+            208.2
+          ],
+          "final_spotlight_total_cpu_percent": 192.5
+        },
+        "interpretation": "The candidate reduced median CPU consumption and median wall time, but host contention generated order-sized outliers. Directional evidence supports the kernel; no stable wall-time factor is claimed until an idle-host rerun."
+      }
+    },
+    "de-common-default": {
+      "source_ids": [
+        "de-common-default"
+      ],
+      "anchor_complete_array_entries": 2812500,
+      "anchor_complete_array_mismatches": 0,
+      "anchor_output_file_mismatches": 0,
+      "domain_safe_full_shortlist_capacity": true,
+      "observed_authority_action_seconds": [
+        1.749834,
+        1.74245
+      ],
+      "fresh_profiled_predecessor_action_median_seconds": 1.798887,
+      "isolated_wall_speedup_established": false
+    },
+    "re-stepwise-anchor": {
+      "source_ids": [
+        "re-stepwise-anchor"
+      ],
+      "all_adjacent_outputs_byte_equal": true,
+      "complete_array_entries_compared": 450000,
+      "complete_array_entries_per_stage": 112500,
+      "distinct_process_count": 5,
+      "total_mismatch_count": 0,
+      "fixed_shocks": true,
+      "full_fidelity_controls": true,
+      "stages": [
+        "state collapse",
+        "reachable updates",
+        "action envelope",
+        "sparse winner",
+        "certified skipping"
+      ],
+      "scope": "Adjacent comparisons downstream of the collapsed implementation; does not compare 625-state and 25-state arrays"
+    },
+    "re-stepwise-two-points": {
+      "source_ids": [
+        "re-stepwise-two-points"
+      ],
+      "all_adjacent_outputs_byte_equal": true,
+      "complete_array_entries_compared": 900000,
+      "complete_array_entries_per_stage": 112500,
+      "distinct_process_count": 10,
+      "total_mismatch_count": 0,
+      "fixed_shocks": true,
+      "full_fidelity_controls": true,
+      "stages": [
+        "state collapse",
+        "reachable updates",
+        "action envelope",
+        "sparse winner",
+        "certified skipping"
+      ],
+      "scope": "Adjacent comparisons downstream of the collapsed implementation; does not compare 625-state and 25-state arrays"
+    }
+  },
+  "source_records": {
+    "re-collapse": {
+      "record_sha256": "f36213ee3cbfed00c4575c91be8eb64512d17520bf97599de6de9f8fe3812b7e"
+    },
+    "early-re-kernels": {
+      "record_sha256": "366d3f2e71f2a11ea375b30c55b418851393847accb23d855cbc5cbaf029bc0a"
+    },
+    "de-reachability": {
+      "record_sha256": "f4f6352ad50d1c466042aaf50244bce57129e389b5e106e96a2b923ad6d5639b"
+    },
+    "de-sparse": {
+      "record_sha256": "7c3692d2693c5ca11b06acead644e76a30e93e4e13cb15572678aee53fd08a72"
+    },
+    "de-lazy": {
+      "record_sha256": "38d25235406a8e5a730171f54b79d8d9e245ade8220b47617d6a1a796fb65285"
+    },
+    "de-grouped-howard": {
+      "record_sha256": "fb5eac677d187f111aeee7065373b36d470a7e85827821640bb58d3bdec3576d"
+    },
+    "de-common-default": {
+      "record_sha256": "84d31c8ed85b996dbd1d4bea0414a708bf0adda9f91eb2e3ddf4942a08f01ce8"
+    },
+    "re-stepwise-anchor": {
+      "record_sha256": "43937a1557212c12ace4f91633ace606fbb9e45c794c8df4cdffe7c3707686a3"
+    },
+    "re-stepwise-two-points": {
+      "record_sha256": "0676c95304f5e2465509f3818b8ea0cd51e82ca177911083ef19f336fcbf2825"
+    }
+  },
+  "dimension_reductions": {
+    "re_state_space": {
+      "coordinates_before": [
+        "lagged aggregate productivity",
+        "current aggregate productivity",
+        "lagged firm productivity",
+        "current firm productivity"
+      ],
+      "coordinates_after": [
+        "current aggregate productivity",
+        "current firm productivity"
+      ],
+      "dimension_before": 4,
+      "dimension_after": 2,
+      "states_before": 625,
+      "states_after": 25,
+      "condition": "RE with theta fixed at zero",
+      "evidence_section": "techniques.re-state-collapse",
+      "implementation": "src/fortran/RE/diag_firms_solve.f90"
+    },
+    "sigma_pi_profile": {
+      "coordinate": "sigma_pi",
+      "RE": {
+        "full_parameter_count": 9,
+        "outer_coordinate_count": 8
+      },
+      "DE": {
+        "full_parameter_count": 10,
+        "outer_coordinate_count": 9
+      },
+      "operation": "Select sigma_pi conditionally within the declared interval, then reconstruct the full vector",
+      "moment_polynomial_degree_at_most": 2,
+      "objective_polynomial_degree_at_most": 4,
+      "package_scope": "Complete Fortran moment-basis evaluators, conditional selection, and an outer parameter-search interface",
+      "agreement_record": "results/accuracy.json",
+      "end_to_end_search_speedup_claim": false
+    }
+  }
+}

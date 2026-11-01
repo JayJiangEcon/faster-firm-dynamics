@@ -1,0 +1,74 @@
+{
+  "date": "2026-11-01",
+  "model_evaluations": 0,
+  "parameter_searches": 0,
+  "python_syntax_and_help": "passed",
+  "conditional_polynomial_checks": {
+    "linear_moment_interior": "passed",
+    "interval_endpoint": "passed",
+    "constant_objective": "passed",
+    "quadratic_moment_interior": "passed",
+    "selected_moment_indexing": "passed",
+    "Fortran_exponent_parsing": "passed"
+  },
+  "builds": {
+    "RE": {
+      "model": "RE",
+      "mode": "sigma-profile",
+      "source_manifest_sha256": "557001388e5844d97eb69192fa94c81550e0f72ba1ac32d230b0ac6687ffe74d",
+      "generated_solver_sha256": "328759c422b2700d101bce618c938123e0a016908722ed01f1eda2ab852a060f",
+      "recorded_source_match": true,
+      "packaged_source_sha256": {
+        "src/fortran/base_lib.f90": "927d2f1fe6b57debed8a394ec05989173a8b750dfb62a31b5689b10ae1d168e0",
+        "src/fortran/RE/diag_firms_solve.f90": "328759c422b2700d101bce618c938123e0a016908722ed01f1eda2ab852a060f",
+        "src/fortran/RE/evaluate.f90": "ba1911649dc83825d08f31022e6218dc288cb39347debd53f3538213bb9649eb"
+      },
+      "driver_sha256": "ba1911649dc83825d08f31022e6218dc288cb39347debd53f3538213bb9649eb",
+      "compiled": true,
+      "compiler_sha256": "9fdae40fe125b8d59936e58f26d3888f7ccfabd7b11c8c9354214d114da76f6e",
+      "compiler_version": "GNU Fortran (GCC) 14.2.0\nCopyright (C) 2024 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+      "flags": [
+        "-O3",
+        "-funroll-loops",
+        "-fopenmp",
+        "-m64"
+      ],
+      "binary": "rcc-re-sigma-profile",
+      "binary_sha256": "f9eb8e34cbccaee7575947444eb767f48cdecb322d2879e0e0eda6c0a248b943"
+    },
+    "DE": {
+      "model": "DE",
+      "mode": "sigma-profile",
+      "source_manifest_sha256": "557001388e5844d97eb69192fa94c81550e0f72ba1ac32d230b0ac6687ffe74d",
+      "generated_solver_sha256": "b40e847f0a57d8193d1b8021e1a6a80809fef0cfa47274a16289cd693d7611c9",
+      "recorded_source_match": true,
+      "packaged_source_sha256": {
+        "src/fortran/base_lib.f90": "927d2f1fe6b57debed8a394ec05989173a8b750dfb62a31b5689b10ae1d168e0",
+        "src/fortran/DE/diag_firms_solve.f90": "b40e847f0a57d8193d1b8021e1a6a80809fef0cfa47274a16289cd693d7611c9",
+        "src/fortran/DE/evaluate.f90": "f1bd5962f6aa23cd1ff3a7e4fe8e8ff209a843905a424ed34c45bad00a00c4ee"
+      },
+      "driver_sha256": "f1bd5962f6aa23cd1ff3a7e4fe8e8ff209a843905a424ed34c45bad00a00c4ee",
+      "compiled": true,
+      "compiler_sha256": "9fdae40fe125b8d59936e58f26d3888f7ccfabd7b11c8c9354214d114da76f6e",
+      "compiler_version": "GNU Fortran (GCC) 14.2.0\nCopyright (C) 2024 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+      "flags": [
+        "-O3",
+        "-funroll-loops",
+        "-fopenmp",
+        "-m64"
+      ],
+      "binary": "rcc-de-sigma-profile",
+      "binary_sha256": "a0e86fae3c34b6e984a73f41eb18f169b3eeabdf0d80a42eab247e08a0587362"
+    }
+  },
+  "kernel_subroutines": {
+    "RE": {
+      "count": 10,
+      "matches_recorded_fused_source": true
+    },
+    "DE": {
+      "count": 9,
+      "matches_recorded_fused_source": true
+    }
+  }
+}

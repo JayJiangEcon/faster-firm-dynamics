@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "version": "0.1.0",
+  "models": {
+    "RE": {
+      "files": {
+        "src/fortran/base_lib.f90": "927d2f1fe6b57debed8a394ec05989173a8b750dfb62a31b5689b10ae1d168e0",
+        "src/fortran/RE/diag_firms_solve.f90": "328759c422b2700d101bce618c938123e0a016908722ed01f1eda2ab852a060f",
+        "src/fortran/RE/evaluate.f90": "ba1911649dc83825d08f31022e6218dc288cb39347debd53f3538213bb9649eb"
+      },
+      "parameter_count": 9,
+      "selected_moments": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
+      ]
+    },
+    "DE": {
+      "files": {
+        "src/fortran/base_lib.f90": "927d2f1fe6b57debed8a394ec05989173a8b750dfb62a31b5689b10ae1d168e0",
+        "src/fortran/DE/diag_firms_solve.f90": "b40e847f0a57d8193d1b8021e1a6a80809fef0cfa47274a16289cd693d7611c9",
+        "src/fortran/DE/evaluate.f90": "f1bd5962f6aa23cd1ff3a7e4fe8e8ff209a843905a424ed34c45bad00a00c4ee"
+      },
+      "parameter_count": 10,
+      "selected_moments": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
+      ]
+    }
+  },
+  "runtime_input_sha256": {
+    "Asimshocks.txt": "2e7f75d3761d1703af6a0de46b0eb22cb57915a8281d1af16bb163810ce8b916",
+    "zfirmshocks.txt": "b8544dc180754f548ba2bb36714fd0c2cdcb74f7ee0bbb40e1b222f68d399a4c",
+    "upifirmshocks1.txt": "241c76d4cff6ae6ad34b33fc060e47a360cb1d224f02a76ed96f2e83dafb1f9c",
+    "upifirmshocks2.txt": "bd74acb88b12842fa77446a7cd7922f7b619f756f8c6b976e2ab96dd228145b5",
+    "_GMMdatamom.txt": "0db4d0af53ade4b66d14bbfdc8338ad4857797ab6df9631134b99f8ca1d26daf",
+    "_GMMdatawgt.txt": "0222ec1525189cd826deb6b0677e02ceff6fc8153d2b775509a4b16e8f4631ef"
+  }
+}

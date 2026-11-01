@@ -1,0 +1,60 @@
+{
+  "records": {
+    "re-kernels": {
+      "date": "2026-09-04",
+      "record_sha256": "a121cc106ab5d9d7c149dc14773106693290340a5a2135706a5612689b37ecb6"
+    },
+    "de-buffers": {
+      "date": "2026-09-04",
+      "record_sha256": "9a8a077e2145848ddbe4ccf228816bbe6290a31ec0c46b9f4f1d2ed182c9bc11"
+    },
+    "de-memory": {
+      "date": "2026-09-05",
+      "record_sha256": "d7e48e4269af48183bafd798776cd1f5a73dcb87b2b157e2859be6352fc447e1"
+    },
+    "de-profile-memory": {
+      "date": "2026-09-05",
+      "record_sha256": "9dcb679c72e0375a7f8c65413c02ff2716ed9ae735678a305450ad3f6560ce00"
+    },
+    "de-final-build": {
+      "date": "2026-09-05",
+      "record_sha256": "5dd4cf9c32079a55e6b1b582ce87d9ad1eab9c0bb214c3fd0e2009c943e75c65"
+    },
+    "re-profile": {
+      "date": "2026-09-04",
+      "record_sha256": "a5fbefde5b0d6264f8474865fde37f4a04d9530d290d53529771df1d22c8902a"
+    },
+    "de-profile": {
+      "date": "2026-09-04",
+      "record_sha256": "288c2b9937c655bbc82d0beb304e8405859b0e2f6d90dd76ec125cc23ee07407"
+    },
+    "re-collapse": {
+      "record_sha256": "f36213ee3cbfed00c4575c91be8eb64512d17520bf97599de6de9f8fe3812b7e"
+    },
+    "early-re-kernels": {
+      "record_sha256": "366d3f2e71f2a11ea375b30c55b418851393847accb23d855cbc5cbaf029bc0a"
+    },
+    "de-reachability": {
+      "record_sha256": "f4f6352ad50d1c466042aaf50244bce57129e389b5e106e96a2b923ad6d5639b"
+    },
+    "de-sparse": {
+      "record_sha256": "7c3692d2693c5ca11b06acead644e76a30e93e4e13cb15572678aee53fd08a72"
+    },
+    "de-lazy": {
+      "record_sha256": "38d25235406a8e5a730171f54b79d8d9e245ade8220b47617d6a1a796fb65285"
+    },
+    "de-grouped-howard": {
+      "record_sha256": "fb5eac677d187f111aeee7065373b36d470a7e85827821640bb58d3bdec3576d"
+    },
+    "de-common-default": {
+      "record_sha256": "84d31c8ed85b996dbd1d4bea0414a708bf0adda9f91eb2e3ddf4942a08f01ce8"
+    },
+    "re-stepwise-anchor": {
+      "record_sha256": "43937a1557212c12ace4f91633ace606fbb9e45c794c8df4cdffe7c3707686a3"
+    },
+    "re-stepwise-two-points": {
+      "record_sha256": "0676c95304f5e2465509f3818b8ea0cd51e82ca177911083ef19f336fcbf2825"
+    }
+  },
+  "note": "Record identifiers bind the existing measurements. Hashes establish record identity, not numerical validity."
+}

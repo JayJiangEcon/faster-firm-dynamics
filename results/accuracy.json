@@ -1,0 +1,252 @@
+{
+  "schema_version": 1,
+  "comparisons": [
+    {
+      "id": "re-stored-points",
+      "source_id": "re-kernels",
+      "rows": 28,
+      "parameter_bit_mismatches": 0,
+      "moment_cells": 476,
+      "moment_bit_mismatches": 0,
+      "raw_q_bit_mismatches": 0,
+      "lazy_result_sha256": "bf7936326c11ecf93cd201b6e8534c4c485fb7400cd7d2a34b45be14d7b218f7"
+    },
+    {
+      "id": "re-complete-arrays",
+      "source_id": "re-kernels",
+      "separate_processes": true,
+      "comparator_imports_solver": false,
+      "array_files": [
+        "RCC_kbpolind.bin",
+        "RCC_dfpolind.bin",
+        "RCC_Vtheta.bin",
+        "RCC_Vthetaold.bin",
+        "RCC_qmat.bin"
+      ],
+      "array_entries": 112500,
+      "array_bytes": 720000,
+      "array_bit_mismatches": 0,
+      "moment_q_parameter_files_byte_equal": true,
+      "comparison_sha256": "34aa60ec79791749482782994b81daebfd5ce38455dfa39f2f462a77033ad68e"
+    },
+    {
+      "id": "de-buffer-profile",
+      "source_id": "de-buffers",
+      "arrays": {
+        "kbpolind": {
+          "entries": 562500,
+          "bit_mismatches": 0,
+          "parent_sha256": "fd89e138aa707f7f49bd2f0df25dba8d13d8251dc540a68517a7f60c7b67e8ae",
+          "swap_sha256": "fd89e138aa707f7f49bd2f0df25dba8d13d8251dc540a68517a7f60c7b67e8ae"
+        },
+        "dfpolind": {
+          "entries": 562500,
+          "bit_mismatches": 0,
+          "parent_sha256": "4c58ce59dd54af2169c5c81114c1237f1f8969c1febec475a9cb576e3f7f0a79",
+          "swap_sha256": "4c58ce59dd54af2169c5c81114c1237f1f8969c1febec475a9cb576e3f7f0a79"
+        },
+        "Vtheta": {
+          "entries": 562500,
+          "bit_mismatches": 0,
+          "parent_sha256": "ac6d4ed2de204995b4a2f102ac1d4b2e11c3b8d252b77c7f84a07859592fb00c",
+          "swap_sha256": "ac6d4ed2de204995b4a2f102ac1d4b2e11c3b8d252b77c7f84a07859592fb00c"
+        },
+        "Vthetaold": {
+          "entries": 562500,
+          "bit_mismatches": 0,
+          "parent_sha256": "4d9e63126961b4c6249d9757a59f0302be44899f847f8bff5140a54c6319252a",
+          "swap_sha256": "4d9e63126961b4c6249d9757a59f0302be44899f847f8bff5140a54c6319252a"
+        },
+        "qmat": {
+          "entries": 562500,
+          "bit_mismatches": 0,
+          "parent_sha256": "e21a4c39afc065a763e9d2f572ac9d433939b91b7f2e001a3ab35cb4edd5cef9",
+          "swap_sha256": "e21a4c39afc065a763e9d2f572ac9d433939b91b7f2e001a3ab35cb4edd5cef9"
+        }
+      },
+      "iteration_histories_equal": true,
+      "profile_selections_equal": true
+    },
+    {
+      "id": "de-memory-action-direct",
+      "source_id": "de-memory",
+      "outputs_equal": true,
+      "arrays": {
+        "kbpolind": {
+          "entries": 562500,
+          "equal": true,
+          "bit_mismatches": 0,
+          "parent_sha256": "fd89e138aa707f7f49bd2f0df25dba8d13d8251dc540a68517a7f60c7b67e8ae",
+          "candidate_sha256": "fd89e138aa707f7f49bd2f0df25dba8d13d8251dc540a68517a7f60c7b67e8ae"
+        },
+        "dfpolind": {
+          "entries": 562500,
+          "equal": true,
+          "bit_mismatches": 0,
+          "parent_sha256": "4c58ce59dd54af2169c5c81114c1237f1f8969c1febec475a9cb576e3f7f0a79",
+          "candidate_sha256": "4c58ce59dd54af2169c5c81114c1237f1f8969c1febec475a9cb576e3f7f0a79"
+        },
+        "Vtheta": {
+          "entries": 562500,
+          "equal": true,
+          "bit_mismatches": 0,
+          "parent_sha256": "ac6d4ed2de204995b4a2f102ac1d4b2e11c3b8d252b77c7f84a07859592fb00c",
+          "candidate_sha256": "ac6d4ed2de204995b4a2f102ac1d4b2e11c3b8d252b77c7f84a07859592fb00c"
+        },
+        "Vthetaold": {
+          "entries": 562500,
+          "equal": true,
+          "bit_mismatches": 0,
+          "parent_sha256": "4d9e63126961b4c6249d9757a59f0302be44899f847f8bff5140a54c6319252a",
+          "candidate_sha256": "4d9e63126961b4c6249d9757a59f0302be44899f847f8bff5140a54c6319252a"
+        },
+        "qmat": {
+          "entries": 562500,
+          "equal": true,
+          "bit_mismatches": 0,
+          "parent_sha256": "e21a4c39afc065a763e9d2f572ac9d433939b91b7f2e001a3ab35cb4edd5cef9",
+          "candidate_sha256": "e21a4c39afc065a763e9d2f572ac9d433939b91b7f2e001a3ab35cb4edd5cef9"
+        },
+        "Vndtheta": {
+          "entries": 562500,
+          "equal": true,
+          "bit_mismatches": 0,
+          "parent_sha256": "b0715ce9b680549d719bc0322bb48580eef63e416b589504b883f1a358837b69",
+          "candidate_sha256": "b0715ce9b680549d719bc0322bb48580eef63e416b589504b883f1a358837b69"
+        }
+      },
+      "arrays_equal": true,
+      "passed": true
+    },
+    {
+      "id": "de-memory-action-forced",
+      "source_id": "de-memory",
+      "outputs_equal": true,
+      "arrays": {
+        "kbpolind": {
+          "entries": 562500,
+          "equal": true,
+          "bit_mismatches": 0,
+          "parent_sha256": "fd89e138aa707f7f49bd2f0df25dba8d13d8251dc540a68517a7f60c7b67e8ae",
+          "candidate_sha256": "fd89e138aa707f7f49bd2f0df25dba8d13d8251dc540a68517a7f60c7b67e8ae"
+        },
+        "dfpolind": {
+          "entries": 562500,
+          "equal": true,
+          "bit_mismatches": 0,
+          "parent_sha256": "4c58ce59dd54af2169c5c81114c1237f1f8969c1febec475a9cb576e3f7f0a79",
+          "candidate_sha256": "4c58ce59dd54af2169c5c81114c1237f1f8969c1febec475a9cb576e3f7f0a79"
+        },
+        "Vtheta": {
+          "entries": 562500,
+          "equal": true,
+          "bit_mismatches": 0,
+          "parent_sha256": "ac6d4ed2de204995b4a2f102ac1d4b2e11c3b8d252b77c7f84a07859592fb00c",
+          "candidate_sha256": "ac6d4ed2de204995b4a2f102ac1d4b2e11c3b8d252b77c7f84a07859592fb00c"
+        },
+        "Vthetaold": {
+          "entries": 562500,
+          "equal": true,
+          "bit_mismatches": 0,
+          "parent_sha256": "4d9e63126961b4c6249d9757a59f0302be44899f847f8bff5140a54c6319252a",
+          "candidate_sha256": "4d9e63126961b4c6249d9757a59f0302be44899f847f8bff5140a54c6319252a"
+        },
+        "qmat": {
+          "entries": 562500,
+          "equal": true,
+          "bit_mismatches": 0,
+          "parent_sha256": "e21a4c39afc065a763e9d2f572ac9d433939b91b7f2e001a3ab35cb4edd5cef9",
+          "candidate_sha256": "e21a4c39afc065a763e9d2f572ac9d433939b91b7f2e001a3ab35cb4edd5cef9"
+        },
+        "Vndtheta": {
+          "entries": 562500,
+          "equal": true,
+          "bit_mismatches": 0,
+          "parent_sha256": "b0715ce9b680549d719bc0322bb48580eef63e416b589504b883f1a358837b69",
+          "candidate_sha256": "b0715ce9b680549d719bc0322bb48580eef63e416b589504b883f1a358837b69"
+        }
+      },
+      "arrays_equal": true,
+      "passed": true,
+      "forced_path_exercised": true
+    },
+    {
+      "id": "de-profile-memory",
+      "source_id": "de-profile-memory",
+      "outputs_equal": true,
+      "arrays": {
+        "kbpolind": {
+          "entries": 562500,
+          "equal": true,
+          "bit_mismatches": 0,
+          "parent_sha256": "fd89e138aa707f7f49bd2f0df25dba8d13d8251dc540a68517a7f60c7b67e8ae",
+          "candidate_sha256": "fd89e138aa707f7f49bd2f0df25dba8d13d8251dc540a68517a7f60c7b67e8ae"
+        },
+        "dfpolind": {
+          "entries": 562500,
+          "equal": true,
+          "bit_mismatches": 0,
+          "parent_sha256": "4c58ce59dd54af2169c5c81114c1237f1f8969c1febec475a9cb576e3f7f0a79",
+          "candidate_sha256": "4c58ce59dd54af2169c5c81114c1237f1f8969c1febec475a9cb576e3f7f0a79"
+        },
+        "Vtheta": {
+          "entries": 562500,
+          "equal": true,
+          "bit_mismatches": 0,
+          "parent_sha256": "ac6d4ed2de204995b4a2f102ac1d4b2e11c3b8d252b77c7f84a07859592fb00c",
+          "candidate_sha256": "ac6d4ed2de204995b4a2f102ac1d4b2e11c3b8d252b77c7f84a07859592fb00c"
+        },
+        "Vthetaold": {
+          "entries": 562500,
+          "equal": true,
+          "bit_mismatches": 0,
+          "parent_sha256": "4d9e63126961b4c6249d9757a59f0302be44899f847f8bff5140a54c6319252a",
+          "candidate_sha256": "4d9e63126961b4c6249d9757a59f0302be44899f847f8bff5140a54c6319252a"
+        },
+        "qmat": {
+          "entries": 562500,
+          "equal": true,
+          "bit_mismatches": 0,
+          "parent_sha256": "e21a4c39afc065a763e9d2f572ac9d433939b91b7f2e001a3ab35cb4edd5cef9",
+          "candidate_sha256": "e21a4c39afc065a763e9d2f572ac9d433939b91b7f2e001a3ab35cb4edd5cef9"
+        },
+        "Vndtheta": {
+          "entries": 562500,
+          "equal": true,
+          "bit_mismatches": 0,
+          "parent_sha256": "b0715ce9b680549d719bc0322bb48580eef63e416b589504b883f1a358837b69",
+          "candidate_sha256": "b0715ce9b680549d719bc0322bb48580eef63e416b589504b883f1a358837b69"
+        }
+      },
+      "arrays_equal": true,
+      "passed": true
+    },
+    {
+      "id": "re-fused-profile",
+      "source_id": "re-profile",
+      "basis_and_coefficients_bit_equal": {
+        "m0": true,
+        "mplus": true,
+        "mminus": true,
+        "c1": true,
+        "c2": true
+      },
+      "maximum_absolute_moment_difference_from_direct": 6.245004513516506e-17,
+      "absolute_raw_objective_difference_from_direct": 0.0
+    },
+    {
+      "id": "de-fused-profile",
+      "source_id": "de-profile",
+      "basis_and_coefficients_bit_equal": {
+        "m0": true,
+        "mplus": true,
+        "mminus": true,
+        "c1": true,
+        "c2": true
+      },
+      "maximum_absolute_moment_difference_from_direct": 1.734723475976807e-18,
+      "absolute_raw_objective_difference_from_direct": 2.7755575615628914e-17
+    }
+  ],
+  "scope": "Equality and rounding differences refer to the recorded finite inputs and execution environment."
+}

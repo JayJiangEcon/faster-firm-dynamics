@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "Please cite this toolkit when publishing scientific results obtained with it, and cite the original Real Credit Cycles paper when using its model. See LICENSE for the citation condition."
+type: software
+title: "Faster Firm Dynamics: Algorithms and Implementation Techniques for Accelerating Heterogeneous-Firm Models"
+version: 0.1.0
+authors:
+  - family-names: Jiang
+    given-names: "Jiannan (Jay)"
+abstract: "Algorithms and implementation techniques for accelerating heterogeneous-firm dynamic models while preserving numerical results, with recorded timing and agreement comparisons using the RE and DE models in Real Credit Cycles (2026)."
+keywords:
+  - Real Credit Cycles
+  - dynamic programming
+  - computational acceleration
+  - heterogeneous firms
+  - Fortran
+  - performance

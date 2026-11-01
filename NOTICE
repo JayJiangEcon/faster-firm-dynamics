@@ -1,0 +1,29 @@
+Faster Firm Dynamics
+Algorithms and Implementation Techniques for Accelerating Heterogeneous-Firm Models
+Version 0.1.0
+Copyright (c) 2026 Jiannan (Jay) Jiang
+
+The Academic Citing License applies to the toolkit's original contributions.
+The integrated solvers are derived from the model software identified below;
+the shared numerical library and fixed input files come from that distribution.
+No ownership of those underlying materials is claimed, and this license does
+not replace their applicable terms or third-party copyright notices.
+
+The model source and inputs accompany:
+Pedro Bordalo, Nicola Gennaioli, Andrei Shleifer, and Stephen J. Terry (2026),
+Real Credit Cycles, American Economic Review 116(4), 1274-1308.
+https://doi.org/10.1257/aer.20211820
+
+The complete integrated source is in src/fortran/. Fixed inputs are in
+data/fixed/. The file identities are recorded in results/integrated-manifest.json.
+The original distribution is available at https://doi.org/10.3886/E237827V1.
+Existing source comments and attributions are retained.
+
+The license uses Johannes Kaiser's Academic Citing License template, submitted
+on September 26, 2004, with the copyright and reference fields completed:
+https://lists.opensource.org/pipermail/license-discuss_lists.opensource.org/attachments/20040926/88bd399b/attachment.txt
+This is not the Academic Free License (AFL); OSI approval is not claimed.
+
+GPT's substantial contribution through Codex is acknowledged in README.md.
+GPT is not listed as an author or copyright holder. OpenAI is the provider of
+the AI system, not an institutional coauthor or project sponsor.

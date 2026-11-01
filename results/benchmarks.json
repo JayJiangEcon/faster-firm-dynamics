@@ -1,0 +1,1289 @@
+{
+  "schema_version": 1,
+  "measurement_dates": [
+    "2026-09-04",
+    "2026-09-05"
+  ],
+  "environment": {
+    "host": "Apple M3; macOS 15.7.7; GNU Fortran 14.2.0",
+    "threads": 8,
+    "compiler_flags": [
+      "-O3",
+      "-funroll-loops",
+      "-fopenmp",
+      "-m64"
+    ],
+    "compiler_sha256": "9fdae40fe125b8d59936e58f26d3888f7ccfabd7b11c8c9354214d114da76f6e"
+  },
+  "comparisons": [
+    {
+      "id": "re-sparse",
+      "comparison": "RE sparse winner",
+      "source_id": "re-kernels",
+      "wall_speedup": 1.172957589579002,
+      "before_seconds": 0.7862217919901013,
+      "after_seconds": 0.670290042005945,
+      "aggregation": "ratio of medians",
+      "pairs": 3,
+      "parameter_vectors": [
+        [
+          0.92428828059544,
+          0.09642701059548,
+          3.489597117955886,
+          0.075000002980232,
+          0.177055818791029,
+          0.008002980164964,
+          0.076392721853193,
+          0.100000001490116,
+          0.389800274254465
+        ]
+      ]
+    },
+    {
+      "id": "re-lazy",
+      "comparison": "RE certified block skipping",
+      "source_id": "re-kernels",
+      "wall_speedup": 1.059815938825282,
+      "before_seconds": 0.6806676250125747,
+      "after_seconds": 0.6422507909883279,
+      "aggregation": "ratio of medians",
+      "pairs": 3,
+      "parameter_vectors": [
+        [
+          0.92428828059544,
+          0.09642701059548,
+          3.489597117955886,
+          0.075000002980232,
+          0.177055818791029,
+          0.008002980164964,
+          0.076392721853193,
+          0.100000001490116,
+          0.389800274254465
+        ]
+      ]
+    },
+    {
+      "id": "de-buffer-direct",
+      "comparison": "DE buffer exchange: direct",
+      "source_id": "de-buffers",
+      "wall_speedup": 1.1542234301009515,
+      "before_seconds": 63.86720158503158,
+      "after_seconds": 55.333482165966416,
+      "aggregation": "ratio of workload totals",
+      "pairs": 8,
+      "order_strata": {
+        "0": 1.1270791320237648,
+        "1": 1.1807936541497615
+      },
+      "observations": [
+        {
+          "label": "direct-0-parent",
+          "stage": "parent",
+          "point_id": "sobol-observed-hull-001",
+          "parameters": [
+            0.936706621340746,
+            0.6863024264566667,
+            0.25455611522332466,
+            4.14311959499109,
+            0.15660183691290283,
+            0.23680135772978456,
+            0.006445748183932288,
+            0.011761088826465448,
+            0.11142534704896888,
+            0.6968540633629681
+          ],
+          "parameter_hex": [
+            "0x1.df9802a135d78p-1",
+            "0x1.5f63081997f9fp-1",
+            "0x1.04aa5bb786218p-2",
+            "0x1.0928df16f9d2ep+2",
+            "0x1.40b876c0468a3p-3",
+            "0x1.e4f81c38c856ap-3",
+            "0x1.a66db5a5f3181p-8",
+            "0x1.816329f000a8cp-7",
+            "0x1.c865f1d855147p-4",
+            "0x1.64ca0e487512ep-1"
+          ],
+          "pid": 10959,
+          "returncode": 0,
+          "wall_seconds": 7.892837249994045,
+          "policy_seconds": 6.1931681632995605,
+          "simulation_seconds": 1.0189321041107178
+        },
+        {
+          "label": "direct-0-swap",
+          "stage": "swap",
+          "point_id": "sobol-observed-hull-001",
+          "parameters": [
+            0.936706621340746,
+            0.6863024264566667,
+            0.25455611522332466,
+            4.14311959499109,
+            0.15660183691290283,
+            0.23680135772978456,
+            0.006445748183932288,
+            0.011761088826465448,
+            0.11142534704896888,
+            0.6968540633629681
+          ],
+          "parameter_hex": [
+            "0x1.df9802a135d78p-1",
+            "0x1.5f63081997f9fp-1",
+            "0x1.04aa5bb786218p-2",
+            "0x1.0928df16f9d2ep+2",
+            "0x1.40b876c0468a3p-3",
+            "0x1.e4f81c38c856ap-3",
+            "0x1.a66db5a5f3181p-8",
+            "0x1.816329f000a8cp-7",
+            "0x1.c865f1d855147p-4",
+            "0x1.64ca0e487512ep-1"
+          ],
+          "pid": 10962,
+          "returncode": 0,
+          "wall_seconds": 6.2864880000124685,
+          "policy_seconds": 5.186251878738403,
+          "simulation_seconds": 0.9400990009307861
+        },
+        {
+          "label": "direct-1-swap",
+          "stage": "swap",
+          "point_id": "sobol-observed-hull-002",
+          "parameters": [
+            0.9183854325348263,
+            0.6774857748398034,
+            0.2553175630370443,
+            4.0474678510315645,
+            0.15909239474233314,
+            0.23723595625477167,
+            0.006550021257691475,
+            0.011910222368732447,
+            0.10884290134000416,
+            0.6840373477846703
+          ],
+          "parameter_hex": [
+            "0x1.d6369d8bb843fp-1",
+            "0x1.5adf6a5ce264dp-1",
+            "0x1.0571f79d5aa5fp-2",
+            "0x1.0309b698f2afap+2",
+            "0x1.45d23bc3af65bp-3",
+            "0x1.e5dbf70c65708p-3",
+            "0x1.ad431f1703028p-8",
+            "0x1.86462fc7e8d99p-7",
+            "0x1.bdd20dda835e6p-4",
+            "0x1.5e3a24abf499fp-1"
+          ],
+          "pid": 10980,
+          "returncode": 0,
+          "wall_seconds": 5.447207457997138,
+          "policy_seconds": 4.650614023208618,
+          "simulation_seconds": 0.768064022064209
+        },
+        {
+          "label": "direct-1-parent",
+          "stage": "parent",
+          "point_id": "sobol-observed-hull-002",
+          "parameters": [
+            0.9183854325348263,
+            0.6774857748398034,
+            0.2553175630370443,
+            4.0474678510315645,
+            0.15909239474233314,
+            0.23723595625477167,
+            0.006550021257691475,
+            0.011910222368732447,
+            0.10884290134000416,
+            0.6840373477846703
+          ],
+          "parameter_hex": [
+            "0x1.d6369d8bb843fp-1",
+            "0x1.5adf6a5ce264dp-1",
+            "0x1.0571f79d5aa5fp-2",
+            "0x1.0309b698f2afap+2",
+            "0x1.45d23bc3af65bp-3",
+            "0x1.e5dbf70c65708p-3",
+            "0x1.ad431f1703028p-8",
+            "0x1.86462fc7e8d99p-7",
+            "0x1.bdd20dda835e6p-4",
+            "0x1.5e3a24abf499fp-1"
+          ],
+          "pid": 10984,
+          "returncode": 0,
+          "wall_seconds": 6.388175208005123,
+          "policy_seconds": 5.513759136199951,
+          "simulation_seconds": 0.845329999923706
+        },
+        {
+          "label": "direct-2-parent",
+          "stage": "parent",
+          "point_id": "sobol-observed-hull-003",
+          "parameters": [
+            0.924899487478032,
+            0.684786146801096,
+            0.25281953382563777,
+            4.09281638001896,
+            0.15774866242090368,
+            0.23895778871676163,
+            0.006394964150574138,
+            0.011839141751048136,
+            0.1097686913246343,
+            0.6793374032233532
+          ],
+          "parameter_hex": [
+            "0x1.d98c6cf59c517p-1",
+            "0x1.5e9c4a328774bp-1",
+            "0x1.02e31fb648c93p-2",
+            "0x1.05f0b41d2dbb1p+2",
+            "0x1.4311bb10af280p-3",
+            "0x1.e962b37d4dc2bp-3",
+            "0x1.a319b1e2c455ep-8",
+            "0x1.83f1eb511536fp-7",
+            "0x1.c19cd0b5d30a0p-4",
+            "0x1.5bd21cb39675cp-1"
+          ],
+          "pid": 10988,
+          "returncode": 0,
+          "wall_seconds": 6.950884542020503,
+          "policy_seconds": 6.020857095718384,
+          "simulation_seconds": 0.8957760334014893
+        },
+        {
+          "label": "direct-2-swap",
+          "stage": "swap",
+          "point_id": "sobol-observed-hull-003",
+          "parameters": [
+            0.924899487478032,
+            0.684786146801096,
+            0.25281953382563777,
+            4.09281638001896,
+            0.15774866242090368,
+            0.23895778871676163,
+            0.006394964150574138,
+            0.011839141751048136,
+            0.1097686913246343,
+            0.6793374032233532
+          ],
+          "parameter_hex": [
+            "0x1.d98c6cf59c517p-1",
+            "0x1.5e9c4a328774bp-1",
+            "0x1.02e31fb648c93p-2",
+            "0x1.05f0b41d2dbb1p+2",
+            "0x1.4311bb10af280p-3",
+            "0x1.e962b37d4dc2bp-3",
+            "0x1.a319b1e2c455ep-8",
+            "0x1.83f1eb511536fp-7",
+            "0x1.c19cd0b5d30a0p-4",
+            "0x1.5bd21cb39675cp-1"
+          ],
+          "pid": 11001,
+          "returncode": 0,
+          "wall_seconds": 6.198112957994454,
+          "policy_seconds": 5.080850124359131,
+          "simulation_seconds": 1.0803678035736084
+        },
+        {
+          "label": "direct-3-swap",
+          "stage": "swap",
+          "point_id": "sobol-observed-hull-004",
+          "parameters": [
+            0.9301666369795161,
+            0.673533813110375,
+            0.25711294173810406,
+            4.0678432721130635,
+            0.15558427104751799,
+            0.2350242997337181,
+            0.006505142704740751,
+            0.01161392663543062,
+            0.11070358396037365,
+            0.6920136873285331
+          ],
+          "parameter_hex": [
+            "0x1.dc3ecd2b508d0p-1",
+            "0x1.58d96c881e544p-1",
+            "0x1.07489d7092f46p-2",
+            "0x1.04578b4ebeabdp+2",
+            "0x1.3ea2f75f5e642p-3",
+            "0x1.e1546b88f9145p-3",
+            "0x1.aa522f2c34659p-8",
+            "0x1.7c90ad89e58cfp-7",
+            "0x1.c5711f0a8e853p-4",
+            "0x1.624f9e36ebbc1p-1"
+          ],
+          "pid": 11007,
+          "returncode": 0,
+          "wall_seconds": 7.194902416988043,
+          "policy_seconds": 6.1563639640808105,
+          "simulation_seconds": 1.0051100254058838
+        },
+        {
+          "label": "direct-3-parent",
+          "stage": "parent",
+          "point_id": "sobol-observed-hull-004",
+          "parameters": [
+            0.9301666369795161,
+            0.673533813110375,
+            0.25711294173810406,
+            4.0678432721130635,
+            0.15558427104751799,
+            0.2350242997337181,
+            0.006505142704740751,
+            0.01161392663543062,
+            0.11070358396037365,
+            0.6920136873285331
+          ],
+          "parameter_hex": [
+            "0x1.dc3ecd2b508d0p-1",
+            "0x1.58d96c881e544p-1",
+            "0x1.07489d7092f46p-2",
+            "0x1.04578b4ebeabdp+2",
+            "0x1.3ea2f75f5e642p-3",
+            "0x1.e1546b88f9145p-3",
+            "0x1.aa522f2c34659p-8",
+            "0x1.7c90ad89e58cfp-7",
+            "0x1.c5711f0a8e853p-4",
+            "0x1.624f9e36ebbc1p-1"
+          ],
+          "pid": 11042,
+          "returncode": 0,
+          "wall_seconds": 7.8571475420030765,
+          "policy_seconds": 6.888473987579346,
+          "simulation_seconds": 0.9390909671783447
+        },
+        {
+          "label": "direct-4-parent",
+          "stage": "parent",
+          "point_id": "sobol-observed-hull-005",
+          "parameters": [
+            0.9308643294310012,
+            0.6824138930819139,
+            0.25610162500116307,
+            4.082853028724715,
+            0.15602379929997892,
+            0.23574868552806197,
+            0.006413528853250976,
+            0.011798930227318712,
+            0.11021847033128952,
+            0.6865727486672251
+          ],
+          "parameter_hex": [
+            "0x1.dc9a3fd7d696fp-1",
+            "0x1.5d655a923ee7ap-1",
+            "0x1.063f811f546e2p-2",
+            "0x1.054d76ca2fd22p+2",
+            "0x1.3f8967db20ed1p-3",
+            "0x1.e2d034f358181p-3",
+            "0x1.a45128ad39f05p-8",
+            "0x1.82a099ba20984p-7",
+            "0x1.c3747157cefd9p-4",
+            "0x1.5f86769bb37c8p-1"
+          ],
+          "pid": 11051,
+          "returncode": 0,
+          "wall_seconds": 7.2624485840206034,
+          "policy_seconds": 6.340807914733887,
+          "simulation_seconds": 0.8935282230377197
+        },
+        {
+          "label": "direct-4-swap",
+          "stage": "swap",
+          "point_id": "sobol-observed-hull-005",
+          "parameters": [
+            0.9308643294310012,
+            0.6824138930819139,
+            0.25610162500116307,
+            4.082853028724715,
+            0.15602379929997892,
+            0.23574868552806197,
+            0.006413528853250976,
+            0.011798930227318712,
+            0.11021847033128952,
+            0.6865727486672251
+          ],
+          "parameter_hex": [
+            "0x1.dc9a3fd7d696fp-1",
+            "0x1.5d655a923ee7ap-1",
+            "0x1.063f811f546e2p-2",
+            "0x1.054d76ca2fd22p+2",
+            "0x1.3f8967db20ed1p-3",
+            "0x1.e2d034f358181p-3",
+            "0x1.a45128ad39f05p-8",
+            "0x1.82a099ba20984p-7",
+            "0x1.c3747157cefd9p-4",
+            "0x1.5f86769bb37c8p-1"
+          ],
+          "pid": 11055,
+          "returncode": 0,
+          "wall_seconds": 6.651833916985197,
+          "policy_seconds": 5.541555881500244,
+          "simulation_seconds": 1.0748097896575928
+        },
+        {
+          "label": "direct-5-swap",
+          "stage": "swap",
+          "point_id": "sobol-observed-hull-006",
+          "parameters": [
+            0.9223856433186363,
+            0.67116001753889,
+            0.2538016428083113,
+            4.10785180218276,
+            0.15847799212821745,
+            0.23793271968401186,
+            0.006483582638924753,
+            0.011653967073497565,
+            0.11086718788982393,
+            0.6943147352346808
+          ],
+          "parameter_hex": [
+            "0x1.d842ee58b4f93p-1",
+            "0x1.57a2492b6cb51p-1",
+            "0x1.03e493ee218eap-2",
+            "0x1.06e70b3ecc22bp+2",
+            "0x1.44901c0a9c8c4p-3",
+            "0x1.e749450d87824p-3",
+            "0x1.a8e8776524f56p-8",
+            "0x1.7de08fb983bd5p-7",
+            "0x1.c61cac22fb01dp-4",
+            "0x1.637d3891ed7e2p-1"
+          ],
+          "pid": 11063,
+          "returncode": 0,
+          "wall_seconds": 6.381463416008046,
+          "policy_seconds": 5.403743028640747,
+          "simulation_seconds": 0.9470608234405518
+        },
+        {
+          "label": "direct-5-parent",
+          "stage": "parent",
+          "point_id": "sobol-observed-hull-006",
+          "parameters": [
+            0.9223856433186363,
+            0.67116001753889,
+            0.2538016428083113,
+            4.10785180218276,
+            0.15847799212821745,
+            0.23793271968401186,
+            0.006483582638924753,
+            0.011653967073497565,
+            0.11086718788982393,
+            0.6943147352346808
+          ],
+          "parameter_hex": [
+            "0x1.d842ee58b4f93p-1",
+            "0x1.57a2492b6cb51p-1",
+            "0x1.03e493ee218eap-2",
+            "0x1.06e70b3ecc22bp+2",
+            "0x1.44901c0a9c8c4p-3",
+            "0x1.e749450d87824p-3",
+            "0x1.a8e8776524f56p-8",
+            "0x1.7de08fb983bd5p-7",
+            "0x1.c61cac22fb01dp-4",
+            "0x1.637d3891ed7e2p-1"
+          ],
+          "pid": 11076,
+          "returncode": 0,
+          "wall_seconds": 7.693513042002451,
+          "policy_seconds": 6.615052938461304,
+          "simulation_seconds": 1.0473361015319824
+        },
+        {
+          "label": "direct-6-parent",
+          "stage": "parent",
+          "point_id": "sobol-observed-hull-007",
+          "parameters": [
+            0.9152297765330396,
+            0.6886762471299898,
+            0.25789754091001826,
+            4.032281429498392,
+            0.15952737864855318,
+            0.23971109313667682,
+            0.006470479008405081,
+            0.01172495712755856,
+            0.11177356015602748,
+            0.6894783741474578
+          ],
+          "parameter_hex": [
+            "0x1.d498ff4d11d07p-1",
+            "0x1.609a2c4de91fbp-1",
+            "0x1.08164affb59b6p-2",
+            "0x1.0210e620fdadap+2",
+            "0x1.46b64a50e5ac1p-3",
+            "0x1.eaeda64c15600p-3",
+            "0x1.a80c9fbb059bdp-8",
+            "0x1.803411b4767e3p-7",
+            "0x1.c9d31296d78f1p-4",
+            "0x1.61034f3886715p-1"
+          ],
+          "pid": 11081,
+          "returncode": 0,
+          "wall_seconds": 8.74317199998768,
+          "policy_seconds": 7.660233974456787,
+          "simulation_seconds": 1.0492699146270752
+        },
+        {
+          "label": "direct-6-swap",
+          "stage": "swap",
+          "point_id": "sobol-observed-hull-007",
+          "parameters": [
+            0.9152297765330396,
+            0.6886762471299898,
+            0.25789754091001826,
+            4.032281429498392,
+            0.15952737864855318,
+            0.23971109313667682,
+            0.006470479008405081,
+            0.01172495712755856,
+            0.11177356015602748,
+            0.6894783741474578
+          ],
+          "parameter_hex": [
+            "0x1.d498ff4d11d07p-1",
+            "0x1.609a2c4de91fbp-1",
+            "0x1.08164affb59b6p-2",
+            "0x1.0210e620fdadap+2",
+            "0x1.46b64a50e5ac1p-3",
+            "0x1.eaeda64c15600p-3",
+            "0x1.a80c9fbb059bdp-8",
+            "0x1.803411b4767e3p-7",
+            "0x1.c9d31296d78f1p-4",
+            "0x1.61034f3886715p-1"
+          ],
+          "pid": 11087,
+          "returncode": 0,
+          "wall_seconds": 8.234617874986725,
+          "policy_seconds": 7.013330936431885,
+          "simulation_seconds": 1.1786580085754395
+        },
+        {
+          "label": "direct-7-swap",
+          "stage": "swap",
+          "point_id": "sobol-observed-hull-008",
+          "parameters": [
+            0.9380461129768637,
+            0.6798580729929854,
+            0.2520646787174457,
+            4.128025131065244,
+            0.15732661811210535,
+            0.23402469652682642,
+            0.006522295070079523,
+            0.011946182483918431,
+            0.10951592581301316,
+            0.6818768190531199
+          ],
+          "parameter_hex": [
+            "0x1.e0479482c0483p-1",
+            "0x1.5c165b7ada581p-1",
+            "0x1.021d3e3e45d01p-2",
+            "0x1.08319051bf721p+2",
+            "0x1.4234753ca7790p-3",
+            "0x1.df4857104ff67p-3",
+            "0x1.ab71f40556a90p-8",
+            "0x1.8773d78a4d17fp-7",
+            "0x1.c093c57c20fcfp-4",
+            "0x1.5d1ef55b77a24p-1"
+          ],
+          "pid": 11102,
+          "returncode": 0,
+          "wall_seconds": 8.938856124994345,
+          "policy_seconds": 7.568525075912476,
+          "simulation_seconds": 1.325408935546875
+        },
+        {
+          "label": "direct-7-parent",
+          "stage": "parent",
+          "point_id": "sobol-observed-hull-008",
+          "parameters": [
+            0.9380461129768637,
+            0.6798580729929854,
+            0.2520646787174457,
+            4.128025131065244,
+            0.15732661811210535,
+            0.23402469652682642,
+            0.006522295070079523,
+            0.011946182483918431,
+            0.10951592581301316,
+            0.6818768190531199
+          ],
+          "parameter_hex": [
+            "0x1.e0479482c0483p-1",
+            "0x1.5c165b7ada581p-1",
+            "0x1.021d3e3e45d01p-2",
+            "0x1.08319051bf721p+2",
+            "0x1.4234753ca7790p-3",
+            "0x1.df4857104ff67p-3",
+            "0x1.ab71f40556a90p-8",
+            "0x1.8773d78a4d17fp-7",
+            "0x1.c093c57c20fcfp-4",
+            "0x1.5d1ef55b77a24p-1"
+          ],
+          "pid": 11110,
+          "returncode": 0,
+          "wall_seconds": 11.079023416998098,
+          "policy_seconds": 9.767327070236206,
+          "simulation_seconds": 1.271345853805542
+        }
+      ]
+    },
+    {
+      "id": "de-buffer-profile",
+      "comparison": "DE buffer exchange: profile",
+      "source_id": "de-buffers",
+      "wall_speedup": 1.1320375123682183,
+      "before_seconds": 41.597714208008256,
+      "after_seconds": 36.74587966699619,
+      "aggregation": "ratio of workload totals",
+      "pairs": 3,
+      "order_strata": {
+        "0": 1.403619206618973,
+        "1": 0.7159113045668067
+      },
+      "observations": [
+        {
+          "label": "profile-0-profile-parent",
+          "stage": "profile-parent",
+          "point_id": "sobol-observed-hull-001-sigma-zero",
+          "parameters": [
+            0.936706621340746,
+            0.6863024264566667,
+            0.25455611522332466,
+            4.14311959499109,
+            0.15660183691290283,
+            0.23680135772978456,
+            0.006445748183932288,
+            0.011761088826465448,
+            0.11142534704896888,
+            0.0
+          ],
+          "parameter_hex": [
+            "0x1.df9802a135d78p-1",
+            "0x1.5f63081997f9fp-1",
+            "0x1.04aa5bb786218p-2",
+            "0x1.0928df16f9d2ep+2",
+            "0x1.40b876c0468a3p-3",
+            "0x1.e4f81c38c856ap-3",
+            "0x1.a66db5a5f3181p-8",
+            "0x1.816329f000a8cp-7",
+            "0x1.c865f1d855147p-4",
+            "0x0.0p+0"
+          ],
+          "pid": 11136,
+          "returncode": 0,
+          "wall_seconds": 19.3449510410137,
+          "policy_seconds": 15.873387098312378,
+          "simulation_seconds": 3.284930944442749
+        },
+        {
+          "label": "profile-0-profile-swap",
+          "stage": "profile-swap",
+          "point_id": "sobol-observed-hull-001-sigma-zero",
+          "parameters": [
+            0.936706621340746,
+            0.6863024264566667,
+            0.25455611522332466,
+            4.14311959499109,
+            0.15660183691290283,
+            0.23680135772978456,
+            0.006445748183932288,
+            0.011761088826465448,
+            0.11142534704896888,
+            0.0
+          ],
+          "parameter_hex": [
+            "0x1.df9802a135d78p-1",
+            "0x1.5f63081997f9fp-1",
+            "0x1.04aa5bb786218p-2",
+            "0x1.0928df16f9d2ep+2",
+            "0x1.40b876c0468a3p-3",
+            "0x1.e4f81c38c856ap-3",
+            "0x1.a66db5a5f3181p-8",
+            "0x1.816329f000a8cp-7",
+            "0x1.c865f1d855147p-4",
+            "0x0.0p+0"
+          ],
+          "pid": 11487,
+          "returncode": 0,
+          "wall_seconds": 11.629552166996291,
+          "policy_seconds": 10.07555103302002,
+          "simulation_seconds": 1.2965681552886963
+        },
+        {
+          "label": "profile-1-profile-swap",
+          "stage": "profile-swap",
+          "point_id": "sobol-observed-hull-001-sigma-zero",
+          "parameters": [
+            0.936706621340746,
+            0.6863024264566667,
+            0.25455611522332466,
+            4.14311959499109,
+            0.15660183691290283,
+            0.23680135772978456,
+            0.006445748183932288,
+            0.011761088826465448,
+            0.11142534704896888,
+            0.0
+          ],
+          "parameter_hex": [
+            "0x1.df9802a135d78p-1",
+            "0x1.5f63081997f9fp-1",
+            "0x1.04aa5bb786218p-2",
+            "0x1.0928df16f9d2ep+2",
+            "0x1.40b876c0468a3p-3",
+            "0x1.e4f81c38c856ap-3",
+            "0x1.a66db5a5f3181p-8",
+            "0x1.816329f000a8cp-7",
+            "0x1.c865f1d855147p-4",
+            "0x0.0p+0"
+          ],
+          "pid": 11510,
+          "returncode": 0,
+          "wall_seconds": 14.511260125000263,
+          "policy_seconds": 12.657619953155518,
+          "simulation_seconds": 1.7920289039611816
+        },
+        {
+          "label": "profile-1-profile-parent",
+          "stage": "profile-parent",
+          "point_id": "sobol-observed-hull-001-sigma-zero",
+          "parameters": [
+            0.936706621340746,
+            0.6863024264566667,
+            0.25455611522332466,
+            4.14311959499109,
+            0.15660183691290283,
+            0.23680135772978456,
+            0.006445748183932288,
+            0.011761088826465448,
+            0.11142534704896888,
+            0.0
+          ],
+          "parameter_hex": [
+            "0x1.df9802a135d78p-1",
+            "0x1.5f63081997f9fp-1",
+            "0x1.04aa5bb786218p-2",
+            "0x1.0928df16f9d2ep+2",
+            "0x1.40b876c0468a3p-3",
+            "0x1.e4f81c38c856ap-3",
+            "0x1.a66db5a5f3181p-8",
+            "0x1.816329f000a8cp-7",
+            "0x1.c865f1d855147p-4",
+            "0x0.0p+0"
+          ],
+          "pid": 11528,
+          "returncode": 0,
+          "wall_seconds": 10.38877516699722,
+          "policy_seconds": 9.435234069824219,
+          "simulation_seconds": 0.9049968719482422
+        },
+        {
+          "label": "profile-2-profile-parent",
+          "stage": "profile-parent",
+          "point_id": "sobol-observed-hull-001-sigma-zero",
+          "parameters": [
+            0.936706621340746,
+            0.6863024264566667,
+            0.25455611522332466,
+            4.14311959499109,
+            0.15660183691290283,
+            0.23680135772978456,
+            0.006445748183932288,
+            0.011761088826465448,
+            0.11142534704896888,
+            0.0
+          ],
+          "parameter_hex": [
+            "0x1.df9802a135d78p-1",
+            "0x1.5f63081997f9fp-1",
+            "0x1.04aa5bb786218p-2",
+            "0x1.0928df16f9d2ep+2",
+            "0x1.40b876c0468a3p-3",
+            "0x1.e4f81c38c856ap-3",
+            "0x1.a66db5a5f3181p-8",
+            "0x1.816329f000a8cp-7",
+            "0x1.c865f1d855147p-4",
+            "0x0.0p+0"
+          ],
+          "pid": 11534,
+          "returncode": 0,
+          "wall_seconds": 11.863987999997335,
+          "policy_seconds": 10.547236919403076,
+          "simulation_seconds": 1.2689030170440674
+        },
+        {
+          "label": "profile-2-profile-swap",
+          "stage": "profile-swap",
+          "point_id": "sobol-observed-hull-001-sigma-zero",
+          "parameters": [
+            0.936706621340746,
+            0.6863024264566667,
+            0.25455611522332466,
+            4.14311959499109,
+            0.15660183691290283,
+            0.23680135772978456,
+            0.006445748183932288,
+            0.011761088826465448,
+            0.11142534704896888,
+            0.0
+          ],
+          "parameter_hex": [
+            "0x1.df9802a135d78p-1",
+            "0x1.5f63081997f9fp-1",
+            "0x1.04aa5bb786218p-2",
+            "0x1.0928df16f9d2ep+2",
+            "0x1.40b876c0468a3p-3",
+            "0x1.e4f81c38c856ap-3",
+            "0x1.a66db5a5f3181p-8",
+            "0x1.816329f000a8cp-7",
+            "0x1.c865f1d855147p-4",
+            "0x0.0p+0"
+          ],
+          "pid": 11549,
+          "returncode": 0,
+          "wall_seconds": 10.605067374999635,
+          "policy_seconds": 9.519286155700684,
+          "simulation_seconds": 1.0317950248718262
+        }
+      ]
+    },
+    {
+      "id": "de-memory",
+      "comparison": "DE direct memory refinement",
+      "source_id": "de-memory",
+      "wall_speedup": 1.027493070101457,
+      "aggregation": "ratio of summed bracket-reference time to candidate time",
+      "pairs": 3,
+      "affected_stage_speedup": 1.0784910192357084,
+      "parameters": [
+        0.913384728899387,
+        0.670470014748329,
+        0.251194290992103,
+        4.022727572501791,
+        0.155165777739315,
+        0.233375106194904,
+        0.006377651836837,
+        0.011605602803207,
+        0.108761419006566,
+        0.677960774768015
+      ],
+      "parameter_hex": [
+        "0x1.d3a729c693cfap-1",
+        "0x1.5747d88495de3p-1",
+        "0x1.01391383030fcp-2",
+        "0x1.01745e592735dp+2",
+        "0x1.3dc78e26ca442p-3",
+        "0x1.ddf3c486760bdp-3",
+        "0x1.a1f73e10825dfp-8",
+        "0x1.7c4ada3ebce84p-7",
+        "0x1.bd7c9d1b32310p-4",
+        "0x1.5b1dacb732eaap-1"
+      ],
+      "brackets": [
+        {
+          "round": 0,
+          "variant": "action-direct",
+          "parent_labels": [
+            "timing-0-parent-1",
+            "timing-0-parent-2"
+          ],
+          "candidate_label": "timing-0-action-direct",
+          "wall_speedup": 1.0083648261278175,
+          "parent_reference_wall": 5.337563290988328,
+          "candidate_wall": 5.293285874999128,
+          "parent_reference_stage": 2.12799,
+          "candidate_stage": 1.948169,
+          "stage_speedup": 1.0923025671797468,
+          "parent_wall_drift": 1.0001899923711106
+        },
+        {
+          "round": 1,
+          "variant": "action-direct",
+          "parent_labels": [
+            "timing-1-parent-3",
+            "timing-1-parent-4"
+          ],
+          "candidate_label": "timing-1-action-direct",
+          "wall_speedup": 1.0117588550164949,
+          "parent_reference_wall": 7.580887187505141,
+          "candidate_wall": 7.492780665983446,
+          "parent_reference_stage": 2.959341,
+          "candidate_stage": 2.783028,
+          "stage_speedup": 1.0633529378791735,
+          "parent_wall_drift": 1.0051290282928977
+        },
+        {
+          "round": 2,
+          "variant": "action-direct",
+          "parent_labels": [
+            "timing-2-parent-3",
+            "timing-2-parent-4"
+          ],
+          "candidate_label": "timing-2-action-direct",
+          "wall_speedup": 1.0589713690236637,
+          "parent_reference_wall": 7.372301958501339,
+          "candidate_wall": 6.961757583019789,
+          "parent_reference_stage": 2.7945305,
+          "candidate_stage": 2.577034,
+          "stage_speedup": 1.0843979939729163,
+          "parent_wall_drift": 1.0333032742962112
+        }
+      ]
+    },
+    {
+      "id": "re-profile",
+      "comparison": "RE fused conditional profiling",
+      "source_id": "re-profile",
+      "wall_speedup": 1.769230769230769,
+      "before_seconds": 1.15,
+      "after_seconds": 0.65,
+      "aggregation": "ratio of medians",
+      "pairs": 3,
+      "parameters": [
+        0.92428828059544,
+        0.09642701059548,
+        3.489597117955886,
+        0.075000002980232,
+        0.177055818791029,
+        0.008002980164964,
+        0.076392721853193,
+        0.100000001490116,
+        0.0
+      ],
+      "before_observations_seconds": [
+        1.28,
+        1.12,
+        1.15
+      ],
+      "after_observations_seconds": [
+        0.77,
+        0.65,
+        0.65
+      ],
+      "before_simulation_seconds": [
+        0.7355470657348633,
+        0.709136962890625,
+        0.7180070877075195
+      ],
+      "after_simulation_seconds": [
+        0.2503530979156494,
+        0.23792576789855957,
+        0.2418680191040039
+      ],
+      "interleaved_order": [
+        "predecessor",
+        "successor",
+        "successor",
+        "predecessor",
+        "predecessor",
+        "successor"
+      ],
+      "simulation_speedup": 2.96859043360658
+    },
+    {
+      "id": "de-profile",
+      "comparison": "DE fused conditional profiling",
+      "source_id": "de-profile",
+      "wall_speedup": 1.157750342935528,
+      "before_seconds": 8.44,
+      "after_seconds": 7.29,
+      "aggregation": "ratio of medians",
+      "pairs": 3,
+      "parameters": [
+        0.913384728899387,
+        0.670470014748329,
+        0.251194290992103,
+        4.022727572501791,
+        0.155165777739315,
+        0.233375106194904,
+        0.006377651836837,
+        0.011605602803207,
+        0.108761419006566,
+        0.0
+      ],
+      "before_observations_seconds": [
+        7.22,
+        9.66,
+        8.44
+      ],
+      "after_observations_seconds": [
+        7.71,
+        7.29,
+        6.71
+      ],
+      "before_simulation_seconds": [
+        1.7882239818572998,
+        2.056171178817749,
+        1.8772289752960205
+      ],
+      "after_simulation_seconds": [
+        0.8985209465026855,
+        0.9647929668426514,
+        0.6929800510406494
+      ],
+      "interleaved_order": [
+        "predecessor",
+        "successor",
+        "successor",
+        "predecessor",
+        "predecessor",
+        "successor"
+      ],
+      "simulation_speedup": 2.0892434200924996
+    }
+  ],
+  "other_variants": [
+    {
+      "variant": "soa-direct",
+      "source_id": "de-memory",
+      "wall_speedup": 0.9204552037348351,
+      "stage_speedup": 0.9581108628763221,
+      "stable_brackets": true,
+      "status": "comparison only",
+      "brackets": [
+        {
+          "round": 0,
+          "variant": "soa-direct",
+          "parent_labels": [
+            "timing-0-parent-0",
+            "timing-0-parent-1"
+          ],
+          "candidate_label": "timing-0-soa-direct",
+          "wall_speedup": 0.9476097656403595,
+          "parent_reference_wall": 5.490448415992432,
+          "candidate_wall": 5.793997291999403,
+          "parent_reference_stage": 2.1622985,
+          "candidate_stage": 2.156423,
+          "stage_speedup": 1.0027246509613372,
+          "parent_wall_drift": 1.0570910897415127
+        },
+        {
+          "round": 1,
+          "variant": "soa-direct",
+          "parent_labels": [
+            "timing-1-parent-4",
+            "timing-1-parent-5"
+          ],
+          "candidate_label": "timing-1-soa-direct",
+          "wall_speedup": 0.8555460569923252,
+          "parent_reference_wall": 7.452866000006907,
+          "candidate_wall": 8.71123879199149,
+          "parent_reference_stage": 2.9261144999999997,
+          "candidate_stage": 3.309075,
+          "stage_speedup": 0.8842696221753813,
+          "parent_wall_drift": 1.0295822790696836
+        },
+        {
+          "round": 2,
+          "variant": "soa-direct",
+          "parent_labels": [
+            "timing-2-parent-1",
+            "timing-2-parent-2"
+          ],
+          "candidate_label": "timing-2-soa-direct",
+          "wall_speedup": 0.9735138906043864,
+          "parent_reference_wall": 7.487868854004773,
+          "candidate_wall": 7.691589124995517,
+          "parent_reference_stage": 2.8376875,
+          "candidate_stage": 2.807136,
+          "stage_speedup": 1.0108835125907687,
+          "parent_wall_drift": 1.078730623458368
+        }
+      ]
+    },
+    {
+      "variant": "howard-old",
+      "source_id": "de-memory",
+      "wall_speedup": 0.9556161960080282,
+      "stage_speedup": 0.9409660762926925,
+      "stable_brackets": true,
+      "status": "comparison only",
+      "brackets": [
+        {
+          "round": 0,
+          "variant": "howard-old",
+          "parent_labels": [
+            "timing-0-parent-2",
+            "timing-0-parent-3"
+          ],
+          "candidate_label": "timing-0-howard-old",
+          "wall_speedup": 0.9489290930809343,
+          "parent_reference_wall": 5.310142124493723,
+          "candidate_wall": 5.5959314170177095,
+          "parent_reference_stage": 1.317956,
+          "candidate_stage": 1.407832,
+          "stage_speedup": 0.9361599963632024,
+          "parent_wall_drift": 1.010188531223291
+        },
+        {
+          "round": 1,
+          "variant": "howard-old",
+          "parent_labels": [
+            "timing-1-parent-2",
+            "timing-1-parent-3"
+          ],
+          "candidate_label": "timing-1-howard-old",
+          "wall_speedup": 0.9076916262034406,
+          "parent_reference_wall": 7.926800020999508,
+          "candidate_wall": 8.732921833987348,
+          "parent_reference_stage": 2.0622735,
+          "candidate_stage": 2.360391,
+          "stage_speedup": 0.8736999505590387,
+          "parent_wall_drift": 1.085923498791558
+        },
+        {
+          "round": 2,
+          "variant": "howard-old",
+          "parent_labels": [
+            "timing-2-parent-4",
+            "timing-2-parent-5"
+          ],
+          "candidate_label": "timing-2-howard-old",
+          "wall_speedup": 1.018510295738434,
+          "parent_reference_wall": 7.383549749996746,
+          "candidate_wall": 7.2493619169981685,
+          "parent_reference_stage": 2.0374175,
+          "candidate_stage": 1.989314,
+          "stage_speedup": 1.024180948809489,
+          "parent_wall_drift": 1.0301076998797254
+        }
+      ]
+    },
+    {
+      "variant": "howard-clean",
+      "source_id": "de-memory",
+      "wall_speedup": 0.9968113853093378,
+      "stage_speedup": 0.967948624103923,
+      "stable_brackets": false,
+      "status": "comparison only",
+      "brackets": [
+        {
+          "round": 0,
+          "variant": "howard-clean",
+          "parent_labels": [
+            "timing-0-parent-3",
+            "timing-0-parent-4"
+          ],
+          "candidate_label": "timing-0-howard-clean",
+          "wall_speedup": 0.9312442433015402,
+          "parent_reference_wall": 5.3390348329849076,
+          "candidate_wall": 5.733227207994787,
+          "parent_reference_stage": 1.310679,
+          "candidate_stage": 1.428504,
+          "stage_speedup": 0.9175186068782446,
+          "parent_wall_drift": 1.0211260522694898
+        },
+        {
+          "round": 1,
+          "variant": "howard-clean",
+          "parent_labels": [
+            "timing-1-parent-1",
+            "timing-1-parent-2"
+          ],
+          "candidate_label": "timing-1-howard-clean",
+          "wall_speedup": 1.0085729746881347,
+          "parent_reference_wall": 7.445193625491811,
+          "candidate_wall": 7.3819087089796085,
+          "parent_reference_stage": 1.958669,
+          "candidate_stage": 2.125073,
+          "stage_speedup": 0.9216949253037425,
+          "parent_wall_drift": 1.243519552614661
+        },
+        {
+          "round": 2,
+          "variant": "howard-clean",
+          "parent_labels": [
+            "timing-2-parent-0",
+            "timing-2-parent-1"
+          ],
+          "candidate_label": "timing-2-howard-clean",
+          "wall_speedup": 1.036448291052083,
+          "parent_reference_wall": 7.559245958022075,
+          "candidate_wall": 7.293413500010502,
+          "parent_reference_stage": 2.086183,
+          "candidate_stage": 1.97929,
+          "stage_speedup": 1.054005729327183,
+          "parent_wall_drift": 1.0577706645696698
+        }
+      ]
+    },
+    {
+      "variant": "howard-guided",
+      "source_id": "de-memory",
+      "wall_speedup": 1.0038887926159656,
+      "stage_speedup": 0.9904385988717159,
+      "stable_brackets": true,
+      "status": "comparison only",
+      "brackets": [
+        {
+          "round": 0,
+          "variant": "howard-guided",
+          "parent_labels": [
+            "timing-0-parent-4",
+            "timing-0-parent-5"
+          ],
+          "candidate_label": "timing-0-howard-guided",
+          "wall_speedup": 0.9886276220606083,
+          "parent_reference_wall": 5.441853291500593,
+          "candidate_wall": 5.504451999993762,
+          "parent_reference_stage": 1.355648,
+          "candidate_stage": 1.394207,
+          "stage_speedup": 0.9723434181581357,
+          "parent_wall_drift": 1.0174283458400963
+        },
+        {
+          "round": 1,
+          "variant": "howard-guided",
+          "parent_labels": [
+            "timing-1-parent-0",
+            "timing-1-parent-1"
+          ],
+          "candidate_label": "timing-1-howard-guided",
+          "wall_speedup": 1.015897754122988,
+          "parent_reference_wall": 6.36017875050311,
+          "candidate_wall": 6.260648499999661,
+          "parent_reference_stage": 1.6727895,
+          "candidate_stage": 1.680721,
+          "stage_speedup": 0.9952808943304688,
+          "parent_wall_drift": 1.0910320363812231
+        },
+        {
+          "round": 2,
+          "variant": "howard-guided",
+          "parent_labels": [
+            "timing-2-parent-2",
+            "timing-2-parent-3"
+          ],
+          "candidate_label": "timing-2-howard-guided",
+          "wall_speedup": 1.0051153730073794,
+          "parent_reference_wall": 7.227911124995444,
+          "candidate_wall": 7.191125834011473,
+          "parent_reference_stage": 1.9351495,
+          "candidate_stage": 1.936576,
+          "stage_speedup": 0.9992633906441059,
+          "parent_wall_drift": 1.0065629476306366
+        }
+      ]
+    },
+    {
+      "variant": "RE grouped Howard",
+      "source_id": "re-kernels",
+      "before_wall_seconds": 0.6521815000160132,
+      "after_wall_seconds": 0.6727783340029418,
+      "before_policy_seconds": 0.398622989654541,
+      "after_policy_seconds": 0.4318089485168457,
+      "pairs": 3,
+      "status": "comparison only"
+    },
+    {
+      "variant": "DE path-only reuse",
+      "source_id": "de-profile",
+      "before_wall_seconds": 7.73,
+      "after_wall_seconds": 7.68,
+      "status": "comparison only"
+    },
+    {
+      "variant": "DE lane-last fusion",
+      "source_id": "de-profile",
+      "before_wall_seconds": 7.73,
+      "after_wall_seconds": 16.82,
+      "status": "comparison only"
+    }
+  ],
+  "aggregation_note": "Each comparison has its own predecessor. Do not multiply these ratios into an overall speedup."
+}

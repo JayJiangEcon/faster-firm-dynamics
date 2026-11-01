@@ -1,0 +1,11 @@
+__pycache__/
+build/
+runs/
+*.mod
+*.o
+.DS_Store
+upstream/
+inputs/
+.local/
+*.bin
+AGENTS.md
