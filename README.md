@@ -48,9 +48,9 @@ available. As time and opportunities permit, I hope to continue this work by:
 I nevertheless reserve the right to publish this work as an academic paper
 in the future.
 
-**How can I use this repository to accelerate my own structural model?**
+**Q: How can I use this repository to accelerate my own structural model?**
 
-Simply ask your AI agent:
+A: Simply ask your AI agent:
 
 > Given [this repository](https://github.com/JayJiangEcon/faster-firm-dynamics),
 > please analyze which ideas could be applied to the structural model we are
