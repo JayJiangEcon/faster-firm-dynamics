@@ -23,7 +23,6 @@ adding any benefit from reducing the parameter-search dimension.
 
 Beyond these gains, **profiling the measurement-noise parameter reduces the outer
 search from nine to eight coordinates for RE and from ten to nine for DE.**
-RE also benefits from removing two redundant state coordinates.
 
 Preserving numerical results has been central to this work. The existing
 checks include bit-for-bit agreement across millions of policy, value-function,
