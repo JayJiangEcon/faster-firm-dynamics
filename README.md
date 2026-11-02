@@ -126,6 +126,8 @@ The objective is the weighted quadratic moment distance, using moments 2–17.
 
 | Algorithm | Implementation location |
 | --- | --- |
+| Eliminate redundant Fortran computation | [RE](src/fortran/RE/diag_firms_solve.f90) and [DE](src/fortran/DE/diag_firms_solve.f90): `default_value_reference_order`, `politeration` |
+| Sparse transition traversal and cached screening with ordered rescoring | [RE](src/fortran/RE/diag_firms_solve.f90) and [DE](src/fortran/DE/diag_firms_solve.f90): `expected_value_table`, `politeration`, `simulate` |
 | RE state reduction | [RE solver](src/fortran/RE/diag_firms_solve.f90): `params`, `discretize` |
 | Action envelopes, reachable-state updates, sparse winners and block skipping | [RE](src/fortran/RE/diag_firms_solve.f90) and [DE](src/fortran/DE/diag_firms_solve.f90): `politeration` |
 | Grouped Howard, common-default calculations, buffer exchange and direct action-data handling | [DE solver](src/fortran/DE/diag_firms_solve.f90): `politeration` |
@@ -169,15 +171,17 @@ The parameter reduction is *profiling*, not fixing `sigma_pi` to a constant:
 for each choice of the remaining parameters, its conditional value is selected
 within the specified interval. The full parameter vector is then reconstructed.
 This package supplies the moment-basis evaluator, conditional minimizer, and
-an outer parameter-search driver. The detailed mechanism is in technique 10 below. Its end-to-end
+an outer parameter-search driver. The detailed mechanism is in technique 13 below. Its end-to-end
 search-time benefit depends on the evaluations avoided; the measured fusion
-speedups in technique 11 concern the evaluator itself.
+speedups in technique 14 concern the evaluator itself.
 
 ## Techniques, measured gains, and numerical agreement
 
 All numbers below come from existing measurements recorded on September 1–5,
 2026. This documentation update ran no numerical experiments. The recorded
-CPU environment used Apple M3, eight OpenMP threads, and GNU Fortran 14.2.0;
+CPU environment used Apple M3 and GNU Fortran 14.2.0. Later optimized
+comparisons used eight OpenMP threads; the first technique has the historical
+thread-setting limitation described below. For the later comparisons,
 the build configuration and fixed-input identities are in the
 [measurement source record](results/measurement-sources.json).
 
@@ -191,6 +195,9 @@ summary statistic; Q is the numerical objective computed from those moments.
 
 | Technique | Model | Existing timing evidence | Agreement evidence |
 | --- | --- | --- | --- |
+| Eliminate redundant Fortran computation | RE / DE | Hoist-only historical DE ≈792 → 305 s; RE ≈1,258 → 611 s; thread effects not isolated | Initial hoist: all 17 moments bitwise equal at each model's published point |
+| Traverse only nonzero transition successors | RE / DE | 625 → 25 successor visits before RE collapse; no isolated wall factor | Included in enclosing finite refactor comparisons; DE retains 625 states |
+| Cache screening scores and rescore retained actions | RE / DE | Shared component of envelope/sparse-winner gains; no additional multiplier | Original-order rescoring with the current near-tie guard; finite implementation evidence |
 | Collapse redundant states | RE | 1,902.493 → 64.801 s; **29.36×** over 28 points | Maximum moment difference 5.20e-18 |
 | Update only reachable states | RE / DE | RE **1.1768×**; DE anchor **2.18–2.27×** | Bitwise moments; separate complete-array comparisons |
 | Construct an action envelope | RE / DE | RE **1.7748×** over 28 points | Bitwise moments and Q; tied winners retained |
@@ -209,7 +216,102 @@ contains the additional earlier-stage extracts and source-record identities;
 [timing records](results/benchmarks.json) and
 [accuracy records](results/accuracy.json) contain the later measurements.
 
-### 1. Remove two RE state coordinates
+### 1. Eliminate redundant Fortran computation
+
+**Principle.** Our first optimization removes repeated calculations from the
+original Fortran implementation. In the policy solver, the continuation value
+following default depends only on the exogenous state and the current input
+value array, yet the original code recomputes it for every one of the 900
+endogenous grid points. We move this calculation outside the endogenous-state
+loop and reuse its result within each value update. It is recomputed when the
+input value array changes. The initial transformation retains the original
+625-successor summation order and also removes concurrent OpenMP writes to
+the same continuation-value entry.
+
+The broader implementation also precomputes payoff components at their actual
+dependency level and skips the terminal `distribution()` call when policy
+iteration already produced that distribution. The `doVFI=0` path retains the
+call. Payoff reuse feeds the screening/rescoring mechanism in technique 3;
+it does not replace final action arithmetic with a reassociated formula.
+
+**Recorded effect.** The early comparison records approximately **792 → 305 s
+for DE** and **1,258 → 611 s for RE** at the published parameter vectors on
+the same machine. These rounded historical observations are reused, not new
+measurements or interleaved estimates of an isolated speedup. The original
+solver used a hard-coded 36-thread setting; the retained summary does not
+specify the hoist-only successor's thread setting, so these times do not
+separate the effects of hoisting and thread allocation. These observations
+apply to the initial hoist, not to the entire expanded redundancy-removal group.
+
+**How agreement was checked.** The historical record reports all 17 simulated
+moments bitwise equal to the corresponding baseline for each model. This is
+fixed-point evidence, not a guarantee over the parameter domain. More
+aggressive early caches changed floating-point summation order and discrete
+policy choices; those failed variants are excluded from this technique's
+agreement and timing claims.
+
+Implementation: `default_value_reference_order` and its calls in `politeration`
+in the [RE](src/fortran/RE/diag_firms_solve.f90) and
+[DE](src/fortran/DE/diag_firms_solve.f90) solvers. These integrated solvers also
+contain later optimizations; the early timings do not measure the complete
+current implementation. The historical evidence extract and its limits are
+retained in [technique-evidence.json](results/technique-evidence.json).
+
+### 2. Traverse only nonzero transition successors
+
+**Principle.** In the original four-coordinate exogenous representation, the
+next lagged coordinates are fixed by the current state. Only the two next
+current productivity coordinates vary, giving 5 × 5 = 25 possible successors
+among 625 labels. The optimized expectation and simulation loops enumerate
+those 25 successors directly, retaining their original order. DE still stores
+625 exogenous states; this does not perform the RE state collapse described
+in technique 4. It also differs from restricting Howard updates to endogenous
+actions reachable under the current policy.
+
+**Work saved and evidence.** The affected successor loops visit 25 rather than
+625 entries. This is a loop-work reduction, not a measured 25-fold wall-speed
+increase. Existing comparisons of the enclosing refactors support finite
+numerical agreement; the retained records do not isolate this component's
+wall-time contribution. After RE state collapse, the same two-coordinate
+successor enumeration covers its 25-state representation directly.
+
+Implementation: `expected_value_table`, `default_value_reference_order`, and
+successor loops in `politeration`, `distribution`, and `simulate` in the
+[RE](src/fortran/RE/diag_firms_solve.f90) and
+[DE](src/fortran/DE/diag_firms_solve.f90) solvers.
+
+### 3. Cache screening scores and recompute retained actions in original order
+
+**Principle.** Compute continuation expectations once per exogenous state and
+candidate action at each policy-improvement step. Reuse factorized payoff components to
+form inexpensive screening scores. The action envelope then retains a small
+candidate set, including near ties under its implemented guard. Retained
+candidates use the original dividend expression and ordered successor
+recurrence; represented ties select the lowest global action index. Later
+common-default acceleration has its own verified inverse-recurrence path.
+
+This separates cheap candidate selection from expensive final action scoring.
+A cached sum accumulated from zero cannot simply replace the recurrence that
+starts from the dividend: the two can round differently and select different
+discrete actions. Earlier attempts that made this substitution changed results
+and are excluded from the retained evidence.
+
+**Evidence and scope.** This shared mechanism is part of the current envelope
+and sparse-winner implementations. Their finite comparisons are reported in
+techniques 6 and 7; no separate wall-time multiplier is assigned to this
+component. The historical interval-guard predecessor used explicit score
+intervals, whereas the current envelope uses bins and a `1e-12` near-tie guard.
+They are different selection constructions. Ordered rescoring preserves a
+retained action's evaluation; it alone does not prove that screening retained
+every possible winner over all parameter values. Historical interval timings
+and their limits appear in the supporting-techniques table below.
+
+Implementation: `expected_value_table`, payoff-component arrays, and candidate
+selection/rescoring inside `politeration` in the
+[RE](src/fortran/RE/diag_firms_solve.f90) and
+[DE](src/fortran/DE/diag_firms_solve.f90) solvers.
+
+### 4. Remove two RE state coordinates
 
 **Principle.** When the diagnostic-expectations parameter `theta` is zero,
 policies and transitions depend on current aggregate and firm productivity,
@@ -234,7 +336,7 @@ Only the full-settings batch supplies these figures.
 
 Implementation: [RE solver](src/fortran/RE/diag_firms_solve.f90), `discretize`.
 
-### 2. Update only states reachable under the current policy
+### 5. Update only states reachable under the current policy
 
 **Principle.** Howard iteration repeatedly evaluates a fixed policy. Most
 actions are never selected by that policy, so their intermediate values need
@@ -263,7 +365,7 @@ complete arrays downstream of state collapse, as described below.
 
 Implementation: [RE](src/fortran/RE/diag_firms_solve.f90) and [DE](src/fortran/DE/diag_firms_solve.f90), `politeration`.
 
-### 3. Build an action envelope before evaluating candidates
+### 6. Build an action envelope before evaluating candidates
 
 **Principle.** Actions share a common dependence on inherited debt. The
 envelope uses this structure to identify the debt thresholds at which actions
@@ -287,7 +389,7 @@ successor-local updates.
 
 Implementation: [RE](src/fortran/RE/diag_firms_solve.f90) and [DE](src/fortran/DE/diag_firms_solve.f90), `politeration`.
 
-### 4. Select winners directly from sparse lists
+### 7. Select winners directly from sparse lists
 
 **Principle.** Once the envelope produces a short candidate list, filling a
 dense array and scanning it with `MAXLOC` reintroduces unnecessary work.
@@ -311,7 +413,7 @@ the unchanged source restored equality, demonstrating comparator sensitivity.
 
 Implementation: [RE](src/fortran/RE/diag_firms_solve.f90) and [DE](src/fortran/DE/diag_firms_solve.f90), `politeration`.
 
-### 5. Skip debt blocks only when the incumbent is certified
+### 8. Skip debt blocks only when the incumbent is certified
 
 **Principle.** A previous winning action can remain optimal after continuation
 values change. A conservative bound compares its margin with the possible
@@ -334,7 +436,7 @@ to certified skipping.
 
 Implementation: [RE](src/fortran/RE/diag_firms_solve.f90) and [DE](src/fortran/DE/diag_firms_solve.f90), `politeration`.
 
-### 6. Group DE Howard updates without reassociating sums
+### 9. Group DE Howard updates without reassociating sums
 
 **Principle.** Reachable pairs can be grouped by current productivity and
 selected action, then processed in contiguous runs of lag states. Four
@@ -359,7 +461,7 @@ the tracked source restored byte equality.
 
 Implementation: [DE solver](src/fortran/DE/diag_firms_solve.f90), `politeration`.
 
-### 7. Reuse common-default calculations with independent lanes
+### 10. Reuse common-default calculations with independent lanes
 
 **Principle.** Some contiguous debt runs share a capital choice and default
 in every successor state. They therefore share a monotone continuation-value
@@ -382,7 +484,7 @@ reported under conditional profiling below.
 
 Implementation: [DE solver](src/fortran/DE/diag_firms_solve.f90), `politeration`.
 
-### 8. Exchange value buffers instead of copying them
+### 11. Exchange value buffers instead of copying them
 
 **Principle.** Consecutive fixed-policy pushes alternate between old and new
 value arrays. Exchanging the two allocatable buffers avoids copying the full
@@ -403,7 +505,7 @@ basis and selected profile outputs.
 
 Implementation: [DE solver](src/fortran/DE/diag_firms_solve.f90), `politeration`.
 
-### 9. Write and consume action data directly
+### 12. Write and consume action data directly
 
 **Principle.** Shortlists and dividends are written directly to their final
 buffers. Winner selection consumes sparse residual data without copying it
@@ -427,7 +529,7 @@ and still retained equality. Two separate profile processes also matched
 
 Implementation: [DE solver](src/fortran/DE/diag_firms_solve.f90), `politeration`.
 
-### 10. Profile out one search coordinate with a shared policy solution
+### 13. Profile out one search coordinate with a shared policy solution
 
 **Principle.** The measurement-noise scale `sigma_pi` enters measured profit
 after policies have been solved. With other parameters and shocks fixed,
@@ -468,7 +570,7 @@ conditional formula is the same.
 
 Implementation: [RE](src/fortran/RE/diag_firms_solve.f90) and [DE](src/fortran/DE/diag_firms_solve.f90), `profile_sigma_micro_moments`.
 
-### 11. Fuse the three conditional moment traversals
+### 14. Fuse the three conditional moment traversals
 
 **Principle.** The three noise-scale lanes traverse the same simulated path.
 A fused traversal loads shared quantities once and updates three independent
@@ -489,6 +591,40 @@ selection outputs bit for bit. This is distinct from the small rounding
 differences between polynomial reconstruction and direct evaluation above.
 
 Implementation: [RE](src/fortran/RE/diag_firms_solve.f90) and [DE](src/fortran/DE/diag_firms_solve.f90), `profile_sigma_micro_moments`.
+
+## Supporting implementation techniques and historical variants
+
+The main table describes mechanisms in the packaged CPU solvers. The following
+items clarify their implementation and earlier development. Historical variants
+are not additional modes supplied by this package, and their timing ratios
+must not be multiplied into the current pipeline's performance.
+
+| Technique | Role and availability | Existing evidence and limits |
+| --- | --- | --- |
+| Controlled threading and contiguous memory layout | Packaged: runtime OpenMP thread count, action-contiguous expectation/price arrays, factorized payoff arrays, and loop unrolling | Replaces the original hard-coded 36 threads; recorded optimized comparisons normally use eight. These changes accompany other refactors; no isolated speed factor is assigned. |
+| Interval-guard action screening | Historical predecessor; not a separate packaged mode. Retains actions whose score upper bound reaches the largest lower bound, then rescores them in original order | At the wrapper point, RE 158.049 → 36.696 s (about 4.31×); DE 178.827 → 77.886 s (about 2.30×). Historical, non-interleaved comparisons against conservative refactors; finite agreement, not a portable interval proof or a current-envelope timing. |
+| Moment-only simulation pruning | Historical optional CPU variant, default off and not included as a packaged mode. Firm paths stop after period 58; the aggregate distribution still spans 302 periods | RE: all 476 moments and 28 raw-Q values matched over 28 points. A stabilized hot-host comparison reduced simulation medians 0.4345 → 0.3936 s (9.4%); the approximately 2.4% total saving is a projection. DE retained 85 moments at five points without an isolated speed gain. |
+
+Thread count is set through `run.py --threads`; `build.py` records the compiler
+and flags. Contiguous arrays reduce indirect access and organize repeated
+loads without licensing reassociated floating-point reductions. The failed
+aggressive compiler/cache variants are not part of these retained techniques.
+
+The interval predecessor has separate finite evidence: the RE historical
+28-row comparison retained all 476 moment bits; the DE five-point comparison
+retained 85 moment cells and five raw-Q values against its stated comparators.
+Those records do not establish a domain-wide guarantee for the interval bound,
+and they must not be attributed to the current envelope's different guard.
+
+Moment-only pruning removes unused diagnostics as well as unused firm periods.
+The firm moments use periods 51–56 and leads through period 58, while aggregate
+moments retain the original macro path and GDP construction. That variant
+cannot supply the omitted diagnostic outputs. Its finite agreement is retained
+as historical evidence, without changing the packaged simulation mode.
+
+See [performance scope](docs/benchmarks.md#foundational-and-optional-techniques),
+[accuracy scope](docs/accuracy.md#foundational-and-optional-techniques), and
+[structured evidence](results/technique-evidence.json).
 
 ## What supports the result-preservation claim
 

@@ -1,11 +1,13 @@
 # Performance measurements
 
-The measurements in this document were recorded on September 4–5, 2026.
+The main comparison set was recorded on September 4–5, 2026; foundational
+and optional historical observations below also cover September 1–2.
 They are reused for this toolkit. No new numerical evaluation was run
 during its preparation.
 
 The [README technique guide](../README.md#techniques-measured-gains-and-numerical-agreement)
-also covers the earlier state reduction, reachable updates, action envelope,
+also covers the initial elimination of redundant Fortran computation,
+state reduction, reachable updates, action envelope,
 DE sparse selection, certified skipping, grouped Howard, and common-default
 measurements from September 1–4. Their selected observations are stored in
 [technique-evidence.json](../results/technique-evidence.json). The table below
@@ -29,6 +31,55 @@ The numerical controls were 50 default iterations, 20 policy iterations,
 100 Howard updates, and at most 1,500 distribution iterations, with
 distribution tolerance `1e-6` and policy tolerance `1e-4`. These settings do
 not by themselves identify the stopping condition of an individual run.
+
+## Initial elimination of redundant computation
+
+The first README technique reuses the historical hoist-only summary: DE
+approximately 792 → 305 seconds and RE approximately 1,258 → 611 seconds,
+with all 17 moments bitwise equal at each model's published point. These are
+rounded, same-machine observations, not a fresh or interleaved benchmark.
+The original solver hard-coded 36 threads; the retained hoist-only summary
+does not identify the successor's thread setting. The timing comparison
+therefore does not isolate hoisting from thread allocation, and the eight-thread
+configuration above must not be imputed to this early successor.
+
+The extract is stored with its source-record identity in
+[technique-evidence.json](../results/technique-evidence.json). Later integrated
+solver timings include additional transformations and are separate evidence.
+
+## Foundational and optional techniques
+
+Sparse transition traversal reduces affected loops from 625 labels to 25
+nonzero successors before RE state collapse. Cached screening and ordered
+rescoring also contribute to the enclosing solver comparisons. Neither has
+an isolated wall-time factor in the retained evidence, so neither adds a
+multiplier to the main table. Likewise, the initial hoist timings above do
+not measure every payoff precomputation or removal of a repeated distribution
+call now described under redundancy elimination.
+
+The historical interval-guard wrapper comparisons were RE 158.049 → 36.696 s
+(about 4.31×) and DE 178.826807 → 77.885571 s (about 2.30×), relative to
+conservative refactors at the corresponding complete vector. They were not
+interleaved timing experiments. These implementations preceded the packaged
+action envelope and do not supply its isolated performance or proof.
+
+Optional moment-only simulation pruning had a stabilized hot-host RE simulation
+median of 0.4345 → 0.3936 s (about 9.4% less stage time). Applying that reduction
+to the earlier simulation share, 7.858 / 31.025 seconds, projects approximately
+2.4% less total evaluator time. That projection is not an observed isolated
+end-to-end gain. Other sequential comparisons were contaminated by host drift;
+the DE port established finite agreement without an isolated speed gain.
+The optional variant remains default off historically and is not a mode in
+this package.
+
+Runtime-controlled threading, contiguous action arrays, factorized payoff
+storage, and `-funroll-loops` are supporting implementation choices in the
+packaged path. The original hard-coded 36-thread setting was removed. No
+separate speedup is assigned to each choice; numerical agreement is bound to
+the recorded compiler and execution environment.
+
+Selected evidence and historical-source extracts are in
+[technique-evidence.json](../results/technique-evidence.json).
 
 ## Main comparisons
 

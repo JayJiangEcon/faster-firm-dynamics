@@ -36,6 +36,7 @@ and source-record identities are in
 
 | Comparison | Coverage | Recorded outcome |
 | --- | --- | --- |
+| Default continuation hoisted out of the endogenous-state loop | Published parameter point for each of RE and DE; historical summary | All 17 moments bitwise equal per model; does not cover the rejected reassociated caches |
 | RE 625-to-25 state reduction | 28 points, 476 moment cells | 402 cells bitwise equal; maximum moment difference 5.204170427930421e-18; maximum raw-Q difference 3.469446951953614e-17; complete ranking unchanged |
 | RE reachable updates and action envelope | 28 points per comparison | 476 moments and 28 raw-Q values bitwise equal |
 | RE stepwise layers downstream of collapse | Four adjacent comparisons at one anchor; eight more at two predefined points | 450,000 plus 900,000 complete-array entries; zero mismatches |
@@ -54,6 +55,34 @@ Existing DE comparisons also include temporary source-mutation checks for
 reachability, sparse selection, and grouped Howard updates. Their comparators
 read independently produced outputs, detected the source changes, and found
 agreement again after fresh execution of the unchanged source.
+
+## Foundational and optional techniques
+
+Sparse successor enumeration and cached screening with ordered rescoring are
+components of the enclosing refactors, not new isolated numerical comparisons.
+DE retains its 625-state representation while visiting 25 nonzero successors.
+The current action envelope uses its bin-based near-tie guard; rescoring a
+retained action in original order does not by itself prove that no winner
+was excluded. The existing finite envelope and sparse-winner comparisons
+supply the current implementation's evidence.
+
+The historical RE interval guard retained all 476 moment bits over 28 stored
+rows. Its recomputed raw Q differed from the stored-moment recomputation by
+at most 3.47e-17, with the tested rank ordering unchanged. The historical DE
+interval candidate retained all 85 moment cells and five raw-Q values against
+its stated comparators at five fixed points. These are distinct predecessor
+implementations, not a proof for the current guard or another architecture.
+
+Optional moment-only simulation pruning retained 476 moment cells and all
+28 raw-Q values for RE, and 85 moments and five raw-Q values for DE. The
+comparison concerns moment outputs; omitted diagnostics are not reproduced.
+The current package does not expose this historical optional mode. Its
+performance limitations are recorded in [Performance](benchmarks.md#foundational-and-optional-techniques).
+
+The first technique's original 17-moment comparisons concern the initial
+hoist. Additional payoff reuse and removal of the repeated terminal distribution
+call belong to the enclosing refactor evidence; they are not independently
+validated by that hoist-only comparison.
 
 ## Which dimensions are removed
 

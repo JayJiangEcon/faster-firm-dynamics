@@ -5,6 +5,64 @@ implementation in the RE and DE pipelines of *Real Credit Cycles* (2026).
 Complete sources are in [`src/fortran/`](../src/fortran/). Their identities are
 in [`integrated-manifest.json`](../results/integrated-manifest.json).
 
+### Eliminating redundant Fortran computation
+
+The first optimization moves the default continuation-value calculation out
+of the endogenous-state loop. For a fixed input value array, this quantity
+depends only on the exogenous state; recomputing it at each of the 900 capital
+and debt grid points repeats the same work. Compute it once per exogenous
+state for each value update and reuse it across endogenous states. Recompute
+it when the input value array changes, rather than caching it across updates.
+
+The initial hoist preserves the original 625-successor summation order and
+removes concurrent OpenMP writes to the shared continuation-value entry.
+This is distinct from the later RE state reduction and from more aggressive
+expectation caches that reassociate floating-point sums. The failed early
+reassociated caches changed discrete choices and are not evidence for this
+transformation. See the [first README technique](../README.md#1-eliminate-redundant-fortran-computation)
+for the historical timing and finite numerical-agreement scope.
+
+Implementation: `default_value_reference_order` and its calls in `politeration`
+in the [RE](../src/fortran/RE/diag_firms_solve.f90) and
+[DE](../src/fortran/DE/diag_firms_solve.f90) solvers. The integrated sources
+include subsequent optimizations as well as this initial hoist.
+
+### Sparse transition traversal and cached action scoring
+
+For the full `(A[t-1], A[t], z[t-1], z[t])` state, the next lag coordinates
+are determined. Enumerating the five next aggregate-productivity nodes and
+five next firm-productivity nodes visits only 25 nonzero successors among
+625 labels. Retain their order. DE keeps all 625 states, so this is distinct
+from the RE state reduction below and from policy-dependent Howard reachability.
+There is no isolated wall-time multiplier for the sparse traversal.
+
+At each policy-improvement step, `expected_value_table` computes each exogenous-state
+and candidate-action expectation once. Model-evaluation-invariant payoff
+components are also precomputed. Their factorized scores feed candidate
+screening; retained actions are rescored from the original dividend with the
+ordered successor recurrence. The current envelope uses bin-based near-tie
+retention (`1e-12`) and lowest-index selection on represented ties. Its finite
+validation does not establish a parameter-domain screening guarantee.
+
+The historical interval guard instead enclosed scores in explicit intervals
+and retained upper endpoints at least as large as the maximum lower endpoint.
+That construction's argument and timing belong to its historical implementation,
+not automatically to the current envelope. The current common-default inverse
+path has its own rounding/tie handling and fallback, described below.
+
+The broader redundancy removal also skips the final `distribution()` call
+when `doVFI=1` because policy iteration already computed it; the `doVFI=0`
+read-policy path still calls it. This is separate from the optional historical
+simulation pruning that omits diagnostic outputs.
+
+Implementation: `expected_value_table`, `default_value_reference_order`,
+`politeration`, `distribution`, and `simulate` in the
+[RE](../src/fortran/RE/diag_firms_solve.f90) and
+[DE](../src/fortran/DE/diag_firms_solve.f90) solvers. The
+[README supporting-techniques table](../README.md#supporting-implementation-techniques-and-historical-variants)
+separates runtime/layout choices, interval history, and optional moment-only
+simulation from the packaged modes.
+
 ### State reduction: two fewer RE state coordinates
 
 The exogenous tuple `(A[t-1], A[t], z[t-1], z[t])` becomes `(A[t], z[t])`.
