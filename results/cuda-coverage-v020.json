@@ -1,0 +1,581 @@
+{
+  "version": "0.2.0",
+  "stage": "Final Mac-input / remote-A100 / Mac-finishing implementation",
+  "date": "2026-11-01",
+  "purpose": "Owner-requested expanded numerical verification; no scientific estimation",
+  "CPU_reference": "Fresh separate-process executions of the packaged accelerated Fortran implementation; original slow baseline not rerun. The same CPU outputs were reused for predecessor and successor comparisons.",
+  "design": {
+    "points_per_model": 28,
+    "existing_anchor": 1,
+    "previous_operational_search_points": 9,
+    "Sobol_points": 16,
+    "Sobol_scrambles": [
+      20261102,
+      20261103
+    ],
+    "points_per_scramble": 8,
+    "boundary_points": 2,
+    "domain": "Policy coordinates 0.75 to 1.25 times the packaged anchor, rho_z upper endpoint capped at 0.98; DE theta spans [0,1.5]. Direct sigma_pi spans [0,1.5] for Sobol points. Boundary tests vary RE rho_z or DE theta, retaining DE execution at theta=0.",
+    "selection": "Fixed before observing comparison outcomes; no dropped or replaced points",
+    "sigma_profile_bounds": [
+      0,
+      1.5
+    ],
+    "fidelity": "Packaged full grids, fixed draws, stopping controls, moments 2 through 17; direct and sigma-profile; sigma bounds [0,1.5]",
+    "counting": "28 distinct policy vectors per model; sigma basis lanes and repeated executions do not add independent points."
+  },
+  "hardware": {
+    "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.35",
+    "cpu": "AMD EPYC 7742 64-Core Processor",
+    "cpu_quota": "1360000 100000",
+    "gpu": "NVIDIA A100-SXM4-80GB, 595.91.07"
+  },
+  "models": [
+    {
+      "model": "RE",
+      "different_policy_vectors": 28,
+      "input_files_compared": 336,
+      "input_mismatches": 0,
+      "direct_comparison_entries": 9223844,
+      "direct_bit_mismatches": 0,
+      "basis_coefficient_entries": 2380,
+      "basis_coefficient_bit_mismatches": 0,
+      "direct_objectives_compared": 28,
+      "direct_objective_bit_mismatches": 0,
+      "profile_selection_entries": 748,
+      "profile_selection_bit_mismatches": 0,
+      "cases": [
+        {
+          "id": "anchor",
+          "family": "existing anchor",
+          "passed": true,
+          "parameter_sha256": "8b1413589b9344980075a91e035557849e21a63fd1326e74f86f21a3e1071295"
+        },
+        {
+          "id": "search-01",
+          "family": "previous operational search candidate",
+          "passed": true,
+          "parameter_sha256": "d038449dd0dc631decbd71e487af708cce2bc15833636aaa852c943073c6a4e1"
+        },
+        {
+          "id": "search-02",
+          "family": "previous operational search candidate",
+          "passed": true,
+          "parameter_sha256": "ad2f43a31b0cbde7f060449069aa84ac1e8a17450f0355699a4a5fb797c05157"
+        },
+        {
+          "id": "search-03",
+          "family": "previous operational search candidate",
+          "passed": true,
+          "parameter_sha256": "11634e8d7dc12de2736659e5f40473d9520f203ccb8d02ebbccc837fb107108a"
+        },
+        {
+          "id": "search-04",
+          "family": "previous operational search candidate",
+          "passed": true,
+          "parameter_sha256": "a6044e99022c67059dc80e7a0e75e1c4c630aeeefd7f6663350ff0a45ba59d9c"
+        },
+        {
+          "id": "search-05",
+          "family": "previous operational search candidate",
+          "passed": true,
+          "parameter_sha256": "01261af2a91a8a1a212d68a4e16cfd26ca21f280607b30e36405fb35cd8cd189"
+        },
+        {
+          "id": "search-06",
+          "family": "previous operational search candidate",
+          "passed": true,
+          "parameter_sha256": "7ccdf898aae1e355f9a51e4cd362a2aafab91f35e9801fb532abe10f5079f038"
+        },
+        {
+          "id": "search-07",
+          "family": "previous operational search candidate",
+          "passed": true,
+          "parameter_sha256": "087b43a7f873eca2aea7159fd11478a33653a97e40af2461fc7872cfec2b6773"
+        },
+        {
+          "id": "search-08",
+          "family": "previous operational search candidate",
+          "passed": true,
+          "parameter_sha256": "0b8987ca8cd1f66706d4286e15c6568c5dd26bc46d25bfedb0e18f659ace4602"
+        },
+        {
+          "id": "search-09",
+          "family": "previous operational search candidate",
+          "passed": true,
+          "parameter_sha256": "6c8c02ad2b2eadcd24bb72c31768a91e38f289ff55c52894c0b6e45ad8c5fd04"
+        },
+        {
+          "id": "sobol-20261102-0",
+          "family": "independent scrambled design",
+          "passed": true,
+          "parameter_sha256": "ae4c2c5d47d5640e141f21f2573b400b919f2d3b48aea4c449f4ece09d94f547"
+        },
+        {
+          "id": "sobol-20261102-1",
+          "family": "independent scrambled design",
+          "passed": true,
+          "parameter_sha256": "8ac41e9e596a2875e03be54eaf9639cd20ab01c033ccabc78827ec7ed5915ee4"
+        },
+        {
+          "id": "sobol-20261102-2",
+          "family": "independent scrambled design",
+          "passed": true,
+          "parameter_sha256": "28866af7821286ebc68323eef879d76780806c52e4436e203489ee6ec9188671"
+        },
+        {
+          "id": "sobol-20261102-3",
+          "family": "independent scrambled design",
+          "passed": true,
+          "parameter_sha256": "02bd289f04f95383d25a64b7dc2fc14e8e0a966309cb732cfd9d3d490f6e8b46"
+        },
+        {
+          "id": "sobol-20261102-4",
+          "family": "independent scrambled design",
+          "passed": true,
+          "parameter_sha256": "8ca21b193cfdbcfd03f27aeb5b87fdfffaeda61872a8cbed9d863cef55f811b7"
+        },
+        {
+          "id": "sobol-20261102-5",
+          "family": "independent scrambled design",
+          "passed": true,
+          "parameter_sha256": "658a502c7a1f5d059030aa87024b09f3c14a369c01b1ec4d59a4862f61bc8fdd"
+        },
+        {
+          "id": "sobol-20261102-6",
+          "family": "independent scrambled design",
+          "passed": true,
+          "parameter_sha256": "8895853e58dca5a00321550427dc8b416ea1cd2e92392c2d3423158d116a79b8"
+        },
+        {
+          "id": "sobol-20261102-7",
+          "family": "independent scrambled design",
+          "passed": true,
+          "parameter_sha256": "36ea536ee8d95bc432276c7c18d608f8d2283e1c440b9e815059ea7e3d27c124"
+        },
+        {
+          "id": "sobol-20261103-0",
+          "family": "independent scrambled design",
+          "passed": true,
+          "parameter_sha256": "bad90f3b17efe83b12ff4c00538fdc504a383cb4da9158aa436a869d9ee3b118"
+        },
+        {
+          "id": "sobol-20261103-1",
+          "family": "independent scrambled design",
+          "passed": true,
+          "parameter_sha256": "a69d6a1bf6f9c7c4e264c09200a4962108d866371e7a8737b974f92177a1e826"
+        },
+        {
+          "id": "sobol-20261103-2",
+          "family": "independent scrambled design",
+          "passed": true,
+          "parameter_sha256": "d6fe74dcceeebec8dbb9b2731beec58a2f6e05707199041158698829f633b332"
+        },
+        {
+          "id": "sobol-20261103-3",
+          "family": "independent scrambled design",
+          "passed": true,
+          "parameter_sha256": "c83e30c302d5c38fdedb1af1229aabba370d9a6c0b56849f1add36648e09e0c5"
+        },
+        {
+          "id": "sobol-20261103-4",
+          "family": "independent scrambled design",
+          "passed": true,
+          "parameter_sha256": "b8fa2e0c2f5c212ef55435a8345b813881467d9dae7638cb1cc924698af59fc6"
+        },
+        {
+          "id": "sobol-20261103-5",
+          "family": "independent scrambled design",
+          "passed": true,
+          "parameter_sha256": "d621e5b0d3babeca726daf2ed739f3084d37a16971af13a1b094add5f049916e"
+        },
+        {
+          "id": "sobol-20261103-6",
+          "family": "independent scrambled design",
+          "passed": true,
+          "parameter_sha256": "26fd1b5e5e1af829cdc4b5016ba6c75eb29dd9a236b5c1227c268988bdd3142b"
+        },
+        {
+          "id": "sobol-20261103-7",
+          "family": "independent scrambled design",
+          "passed": true,
+          "parameter_sha256": "b0c541149088380fcb2945981b80fdffadbbe109097b324bd594733221965fea"
+        },
+        {
+          "id": "boundary-lower",
+          "family": "rho_z boundary",
+          "passed": true,
+          "parameter_sha256": "403ba825e1d0d9c4b7bd8866e4239372e62e12be516829f87f4e6dbfc5a1b7de"
+        },
+        {
+          "id": "boundary-upper",
+          "family": "rho_z boundary",
+          "passed": true,
+          "parameter_sha256": "9624dd2d171b55a349e52e0173739d2a0ea1acbed73d51a98294ae53c1ba0b6a"
+        }
+      ],
+      "identities": {
+        "local_source_sha256": {
+          "src/fortran/base_lib.f90": "927d2f1fe6b57debed8a394ec05989173a8b750dfb62a31b5689b10ae1d168e0",
+          "src/fortran/RE/diag_firms_solve.f90": "328759c422b2700d101bce618c938123e0a016908722ed01f1eda2ab852a060f",
+          "src/fortran/prepare_cuda_inputs.F90": "79fad69c559dea3225a9f7fdaebd2ddd8fd8523d2d52f2bb0d1f0ffa72e294a9",
+          "src/fortran/finalize_numeric.f90": "e3e9527f556a9401480a5623c95ca5d796975ebb410d3a941627bf76a018e0d5",
+          "src/cuda/re_native_parallel.cu": "31a434d60b0ca2659bc7640cae1caccc98971111241265328a65a9792db3daec",
+          "src/cuda/re_action_block_reduce.cu": "34efd700398828afac646cb3365787f431159984c4e6c605162639fd916434d2",
+          "src/cuda/re_simulation_parallel.cu": "bfb05703deedb1dd9cb5b71dbd04b8ee38629f725656d983a78d7af89cbcccb9"
+        },
+        "local_binary_sha256": {
+          "prepare-inputs": "7dd7142ed3a184c83410d6a695a7b9ccf9054480e3b472033aa0834215d5c673",
+          "finalize-numeric.dylib": "8c051147ca4246dc85373551611f9ce28aaf74d2e391a6bb487a3a984d1fc2b6"
+        },
+        "Fortran_compiler": "GNU Fortran (GCC) 14.2.0\nCopyright (C) 2024 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+        "Fortran_flags": [
+          "-O3",
+          "-funroll-loops",
+          "-fopenmp",
+          "-m64",
+          "-B<compiler-libexec>/"
+        ],
+        "remote_build": {
+          "version": "0.2.0",
+          "kind": "cuda-pipeline",
+          "model": "RE",
+          "build_scope": "Remote CUDA worker; local build owns input construction and numerical finishing",
+          "CUDA_flags": [
+            "-O3",
+            "-std=c++17",
+            "--default-stream",
+            "per-thread",
+            "--fmad=false",
+            "--prec-div=true",
+            "--prec-sqrt=true",
+            "-Xcompiler=-pthread",
+            "-Xcompiler=-ffp-contract=off",
+            "-Xcompiler=-fno-fast-math",
+            "-Xcompiler=-march=native",
+            "-arch=sm_80"
+          ],
+          "CUDA_compiler": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2024 NVIDIA Corporation\nBuilt on Thu_Mar_28_02:18:24_PDT_2024\nCuda compilation tools, release 12.4, V12.4.131\nBuild cuda_12.4.r12.4/compiler.34097967_0\n",
+          "source_sha256": {
+            "src/cuda/re_native_parallel.cu": "31a434d60b0ca2659bc7640cae1caccc98971111241265328a65a9792db3daec",
+            "src/cuda/re_action_block_reduce.cu": "34efd700398828afac646cb3365787f431159984c4e6c605162639fd916434d2",
+            "src/cuda/re_simulation_parallel.cu": "bfb05703deedb1dd9cb5b71dbd04b8ee38629f725656d983a78d7af89cbcccb9"
+          },
+          "binary_sha256": {
+            "evaluate-cuda": "e3d300a3e3fc6290ddd5a58cb41807c90dd2213234722920a6e2c96b350686c7"
+          }
+        },
+        "CPU_reference_binary_sha256": "6a112c0e11c0b147c214fce1b7ad9edff7527958472abb6746f6cb31147032fe",
+        "CPU_observer_source_sha256": {
+          "base_lib.f90": "927d2f1fe6b57debed8a394ec05989173a8b750dfb62a31b5689b10ae1d168e0",
+          "diag_firms_solve.f90": "80774fb30d36783080a3ea13889bea2b1781af6566fe8ac8c41e29aee061013d",
+          "evaluate.f90": "ba1911649dc83825d08f31022e6218dc288cb39347debd53f3538213bb9649eb"
+        },
+        "driver_sha256": {
+          "gpu.py": "cff66ce426522a89c66421cbe7b1c5e13d65f675d2968958f451a519e6e1be85",
+          "cuda_pipeline.py": "8e5bc85a41f48365444cd9509fa8673684ad1c47a059653b8db87fe8f19014b9",
+          "sigma_profile.py": "9f78826cc07d65e1fff17dd330b4843eb04e1a4b900c84327939c4e8048584df"
+        }
+      }
+    },
+    {
+      "model": "DE",
+      "different_policy_vectors": 28,
+      "input_files_compared": 336,
+      "input_mismatches": 0,
+      "direct_comparison_entries": 115063844,
+      "direct_bit_mismatches": 0,
+      "basis_coefficient_entries": 2380,
+      "basis_coefficient_bit_mismatches": 0,
+      "direct_objectives_compared": 28,
+      "direct_objective_bit_mismatches": 0,
+      "profile_selection_entries": 746,
+      "profile_selection_bit_mismatches": 0,
+      "cases": [
+        {
+          "id": "anchor",
+          "family": "existing anchor",
+          "passed": true,
+          "parameter_sha256": "f521df545075341fdc59e19817a0d3fc158db876d117fa4fbc0b9205937bddf3"
+        },
+        {
+          "id": "search-01",
+          "family": "previous operational search candidate",
+          "passed": true,
+          "parameter_sha256": "162035f4918ebc3d20e0d7e068261c35238fb89c2028a83c189e2b113d4d3555"
+        },
+        {
+          "id": "search-02",
+          "family": "previous operational search candidate",
+          "passed": true,
+          "parameter_sha256": "e614679049d1a57f52a5751ec2fdfb50efab2e0cced309c4222ee165090ab6e0"
+        },
+        {
+          "id": "search-03",
+          "family": "previous operational search candidate",
+          "passed": true,
+          "parameter_sha256": "204b7ff30482a69919f4c69b9c03d1adee0ee5d46e4bba8e77966393bd5df142"
+        },
+        {
+          "id": "search-04",
+          "family": "previous operational search candidate",
+          "passed": true,
+          "parameter_sha256": "ec513a02606ff764c243fa7e7a689386c8dcc43edd00791d576d9eccb5a6d1af"
+        },
+        {
+          "id": "search-05",
+          "family": "previous operational search candidate",
+          "passed": true,
+          "parameter_sha256": "b95d050ac4bfbcc3ddefee2ed34df432bc29c557bf222d3fc0009dc6ba780aef"
+        },
+        {
+          "id": "search-06",
+          "family": "previous operational search candidate",
+          "passed": true,
+          "parameter_sha256": "199158e1170c3338e0b6d258ff693d17cbb5f10ead12b920d45dda3cfa32ae38"
+        },
+        {
+          "id": "search-07",
+          "family": "previous operational search candidate",
+          "passed": true,
+          "parameter_sha256": "3d8ca16a30cdaa5be8c0760392165ee1cea75e6a5e7d014e7912e8fb5e5b20b1"
+        },
+        {
+          "id": "search-08",
+          "family": "previous operational search candidate",
+          "passed": true,
+          "parameter_sha256": "2caff66235ffa49c2a36a237ebfcb9548d303af709517632f44048d06b599a49"
+        },
+        {
+          "id": "search-09",
+          "family": "previous operational search candidate",
+          "passed": true,
+          "parameter_sha256": "5bd783e76f71004e12574dff6875a36ec7aecc8035cfba3ee917990c74b67041"
+        },
+        {
+          "id": "sobol-20261102-0",
+          "family": "independent scrambled design",
+          "passed": true,
+          "parameter_sha256": "76609232291566184ff6f549a372508d27506c317ff7a1c2c9f503fef4983146"
+        },
+        {
+          "id": "sobol-20261102-1",
+          "family": "independent scrambled design",
+          "passed": true,
+          "parameter_sha256": "df479560ace3981bef78770177026443e08866ba44758bcde1c974e5b297ac2d"
+        },
+        {
+          "id": "sobol-20261102-2",
+          "family": "independent scrambled design",
+          "passed": true,
+          "parameter_sha256": "b5f83695e1eb37d13127500631d03024169804bb29be952ae23b72df2f68eea0"
+        },
+        {
+          "id": "sobol-20261102-3",
+          "family": "independent scrambled design",
+          "passed": true,
+          "parameter_sha256": "a897b0307cee7b6b60ffbdcec04ac6b2f4ba8a27774a62c14894c6fc909908d8"
+        },
+        {
+          "id": "sobol-20261102-4",
+          "family": "independent scrambled design",
+          "passed": true,
+          "parameter_sha256": "78fa001979b498fca1f3fdb7bfbe9e45fdc04fd16898c6aabac3ec20e4ab4333"
+        },
+        {
+          "id": "sobol-20261102-5",
+          "family": "independent scrambled design",
+          "passed": true,
+          "parameter_sha256": "d4f49dff19e7dc30db039c75ece5a2986cf7289b93596f289ffe86c8760324bb"
+        },
+        {
+          "id": "sobol-20261102-6",
+          "family": "independent scrambled design",
+          "passed": true,
+          "parameter_sha256": "51bc32bd4290d109550b35df9648836e2cfb640d05217c0d287648ed5a62081a"
+        },
+        {
+          "id": "sobol-20261102-7",
+          "family": "independent scrambled design",
+          "passed": true,
+          "parameter_sha256": "7dc949d1bb658b53ede9e48389cc0fb3ac46623a5e11ebbff50416bf28589438"
+        },
+        {
+          "id": "sobol-20261103-0",
+          "family": "independent scrambled design",
+          "passed": true,
+          "parameter_sha256": "00b03b621fac4c1ae054eb5b04a31de460e23fd6ca505252924940ac6d3cdcfd"
+        },
+        {
+          "id": "sobol-20261103-1",
+          "family": "independent scrambled design",
+          "passed": true,
+          "parameter_sha256": "46896adb357013c04d23f8692a60cba892867b4f56427fd0a5d4267e74c7b815"
+        },
+        {
+          "id": "sobol-20261103-2",
+          "family": "independent scrambled design",
+          "passed": true,
+          "parameter_sha256": "4f5734e323a8a32e7c2a4c22c95ffa010da180e3d73fc1272e7733760e4c792c"
+        },
+        {
+          "id": "sobol-20261103-3",
+          "family": "independent scrambled design",
+          "passed": true,
+          "parameter_sha256": "900ba9bb833c620adf59df60d59ffa2121477ed1bb640b27092321f23d06a298"
+        },
+        {
+          "id": "sobol-20261103-4",
+          "family": "independent scrambled design",
+          "passed": true,
+          "parameter_sha256": "31d4fb18a64307cfdfa70f11c97e7db48046ed9eae77f90d1210125c953acf6b"
+        },
+        {
+          "id": "sobol-20261103-5",
+          "family": "independent scrambled design",
+          "passed": true,
+          "parameter_sha256": "f00a1c19d4d4a080e868d6cb797a18180fc3eb6a35ef375cc5545e177aea5d3c"
+        },
+        {
+          "id": "sobol-20261103-6",
+          "family": "independent scrambled design",
+          "passed": true,
+          "parameter_sha256": "830f5858ed388573087270cbcdbad91c37c5424182981539e5f4657baf2a128e"
+        },
+        {
+          "id": "sobol-20261103-7",
+          "family": "independent scrambled design",
+          "passed": true,
+          "parameter_sha256": "cab97b8fc8077bba6d3d65dc4d1aa6db3169ebfd8ca160b1d184120bc1746c38"
+        },
+        {
+          "id": "boundary-lower",
+          "family": "theta boundary, DE solver retained",
+          "passed": true,
+          "parameter_sha256": "92b310509d9ab417e2a9102d5dfac58c527b38432f4698366810337da6cd684e"
+        },
+        {
+          "id": "boundary-upper",
+          "family": "theta boundary, DE solver retained",
+          "passed": true,
+          "parameter_sha256": "2e6f4c0e7244a08518001fddaf2f328b53ee26e71ba3ee1c58065459a53c3df9"
+        }
+      ],
+      "identities": {
+        "local_source_sha256": {
+          "src/fortran/base_lib.f90": "927d2f1fe6b57debed8a394ec05989173a8b750dfb62a31b5689b10ae1d168e0",
+          "src/fortran/DE/diag_firms_solve.f90": "b40e847f0a57d8193d1b8021e1a6a80809fef0cfa47274a16289cd693d7611c9",
+          "src/fortran/prepare_cuda_inputs.F90": "79fad69c559dea3225a9f7fdaebd2ddd8fd8523d2d52f2bb0d1f0ffa72e294a9",
+          "src/fortran/finalize_numeric.f90": "e3e9527f556a9401480a5623c95ca5d796975ebb410d3a941627bf76a018e0d5",
+          "src/cuda/de_native_simulation_parallel.cu": "9b357c9ffb51605d218279ac2e5f2768c2f00aff2945599bc33be45f9b5239bd",
+          "src/cuda/de_action_block_reduce.cu": "386c9bae5f9714f930cf012d73ba250f074747f50f16f08cad39488745bd6e24",
+          "src/cuda/de_simulation_parallel.cu": "50364c2d4aaaeb257691eb90f1ff2d0060aa13ca26970475f4d0ca3767c22946"
+        },
+        "local_binary_sha256": {
+          "prepare-inputs": "a2fbdbabee09c8dbc45907ee2a1f6b7fd6bbe3922f90cabcb8898f8b91a84cc5",
+          "finalize-numeric.dylib": "b246f278f54da54a57cae7f0cfa9d76c438abb9a9ad2f12c75ed0117bde74cc9"
+        },
+        "Fortran_compiler": "GNU Fortran (GCC) 14.2.0\nCopyright (C) 2024 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+        "Fortran_flags": [
+          "-O3",
+          "-funroll-loops",
+          "-fopenmp",
+          "-m64",
+          "-B<compiler-libexec>/"
+        ],
+        "remote_build": {
+          "version": "0.2.0",
+          "kind": "cuda-pipeline",
+          "model": "DE",
+          "build_scope": "Remote CUDA worker; local build owns input construction and numerical finishing",
+          "CUDA_flags": [
+            "-O3",
+            "-std=c++17",
+            "--default-stream",
+            "per-thread",
+            "--fmad=false",
+            "--prec-div=true",
+            "--prec-sqrt=true",
+            "-Xcompiler=-pthread",
+            "-Xcompiler=-ffp-contract=off",
+            "-Xcompiler=-fno-fast-math",
+            "-Xcompiler=-march=native",
+            "-arch=sm_80"
+          ],
+          "CUDA_compiler": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2024 NVIDIA Corporation\nBuilt on Thu_Mar_28_02:18:24_PDT_2024\nCuda compilation tools, release 12.4, V12.4.131\nBuild cuda_12.4.r12.4/compiler.34097967_0\n",
+          "source_sha256": {
+            "src/cuda/de_native_simulation_parallel.cu": "9b357c9ffb51605d218279ac2e5f2768c2f00aff2945599bc33be45f9b5239bd",
+            "src/cuda/de_action_block_reduce.cu": "386c9bae5f9714f930cf012d73ba250f074747f50f16f08cad39488745bd6e24",
+            "src/cuda/de_simulation_parallel.cu": "50364c2d4aaaeb257691eb90f1ff2d0060aa13ca26970475f4d0ca3767c22946"
+          },
+          "binary_sha256": {
+            "evaluate-cuda": "4ccfadb39bb0e323544db517c97a13125fdf86e8769d392137860ec85b7e35cc"
+          }
+        },
+        "CPU_reference_binary_sha256": "52504569981ecd3add1946c12ea2ff6b3cf2a6ab097fd89435ed0c5df75f2ad4",
+        "CPU_observer_source_sha256": {
+          "base_lib.f90": "927d2f1fe6b57debed8a394ec05989173a8b750dfb62a31b5689b10ae1d168e0",
+          "diag_firms_solve.f90": "d085ea5147ba9d0af3a97c69c4fa0534dc970bf416579c5a9fb8d8b18cb00e78",
+          "evaluate.f90": "f1bd5962f6aa23cd1ff3a7e4fe8e8ff209a843905a424ed34c45bad00a00c4ee"
+        },
+        "driver_sha256": {
+          "gpu.py": "cff66ce426522a89c66421cbe7b1c5e13d65f675d2968958f451a519e6e1be85",
+          "cuda_pipeline.py": "8e5bc85a41f48365444cd9509fa8673684ad1c47a059653b8db87fe8f19014b9",
+          "sigma_profile.py": "9f78826cc07d65e1fff17dd330b4843eb04e1a4b900c84327939c4e8048584df"
+        }
+      }
+    }
+  ],
+  "initial_findings": {
+    "RE": {
+      "cases": 28,
+      "macro_moment_mismatch_cases": 3,
+      "max_direct_moment_abs": 5.421010862427522e-20,
+      "direct_objective_mismatch_cases": 18,
+      "max_direct_objective_abs": 1.1102230246251565e-16,
+      "other_array_mismatches": 0
+    },
+    "DE": {
+      "cases": 28,
+      "macro_moment_mismatch_cases": 2,
+      "max_direct_moment_abs": 5.421010862427522e-20,
+      "direct_objective_mismatch_cases": 15,
+      "max_direct_objective_abs": 1.3322676295501878e-15,
+      "other_array_mismatches": 0
+    }
+  },
+  "resolution": {
+    "macro": "Return the already computed macro output path; compute growth variance with the Mac Fortran log and accumulation path. A probe found one different Mac/Linux log result among 252 identical inputs at a discrepant point.",
+    "direct_objective": "Use the Mac Fortran matmul/dot-product expressions with the same selected moments and weights.",
+    "profile": "Keep conditional polynomial selection on the Mac; its moment bases now receive the locally finished macro moment.",
+    "kernels": "Policy, distribution and micro-simulation kernels unchanged; the GPU interface additionally returns the macro path.",
+    "independent_comparison": "Comparator reads separately written CPU and final pipeline files without importing either evaluator. Final moments are distinguished from remote intermediate moments."
+  },
+  "run_accounting": {
+    "CPU_direct": 56,
+    "CPU_profile": 56,
+    "GPU_predecessor_direct": 56,
+    "GPU_predecessor_profile": 56,
+    "GPU_final_direct_completed": 64,
+    "GPU_final_profile_completed": 56,
+    "extra_final_direct_evaluations": 8,
+    "extra_reason": "A host-key-verification upload failure interrupted the first DE profile batch after eight direct evaluations. The unchanged key was verified; DE resumed with new output directories.",
+    "comparison_workflow": "After the first DE retry batch, file comparisons were consolidated into one independent offline process. Already completed GPU outputs were retained; no first-batch model rerun was needed.",
+    "scheduler_protocol_tests_passed": 5,
+    "comparator_sensitivity": "The comparator retained detection of the known one-entry predecessor mismatch after adding an equal-byte fast path."
+  },
+  "claim_limits": [
+    "Finite pointwise evidence, not a theorem over the parameter domain.",
+    "No new optimizer search or estimator endpoint in this coverage run.",
+    "Validation used array dumps and is not a performance benchmark.",
+    "Earlier ten-point timings precede the final numerical-finishing change and are retained as historical integration measurements."
+  ],
+  "cloud": {
+    "terminated": true,
+    "remaining_pods": 0,
+    "new_compute_estimate_usd": 0.6292636754340596,
+    "cumulative_compute_estimate_usd": 5.496853816166163,
+    "budget_usd": 10,
+    "scope": "Elapsed-time compute estimates, not an invoice."
+  }
+}

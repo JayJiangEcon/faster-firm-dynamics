@@ -1,0 +1,323 @@
+{
+  "version": "0.2.0",
+  "date": "2026-11-01",
+  "evidence": "New implementation validation; historical CPU direct references reused and two CPU profile references freshly executed in separate processes.",
+  "GPU": "NVIDIA A100-SXM4-80GB",
+  "CPU_input_and_search_host": "MacBook Air M3",
+  "CUDA_host_CPU_quota_equivalents": 15.3,
+  "models": [
+    {
+      "model": "RE",
+      "input_files_bit_identical": 12,
+      "input_files_compared": 12,
+      "identical_input_direct_comparison": {
+        "direct_entries": 329423,
+        "direct_bit_mismatches": 0
+      },
+      "remote_profile_basis": [
+        {
+          "name": "m0",
+          "entries": 17,
+          "bit_mismatches": 0
+        },
+        {
+          "name": "mp",
+          "entries": 17,
+          "bit_mismatches": 0
+        },
+        {
+          "name": "mm",
+          "entries": 17,
+          "bit_mismatches": 0
+        },
+        {
+          "name": "c1",
+          "entries": 17,
+          "bit_mismatches": 0
+        },
+        {
+          "name": "c2",
+          "entries": 17,
+          "bit_mismatches": 0
+        }
+      ],
+      "remote_profile_selection_equal": {
+        "sigma_pi": true,
+        "objective": true,
+        "moments": true,
+        "candidate_sigmas": true
+      },
+      "warm_remote_search": {
+        "status": "evaluation_budget_reached",
+        "attempted_evaluations": 10,
+        "completed_evaluations": 10,
+        "unique_policy_vectors": 10,
+        "generations_completed": 1,
+        "search_seconds": 3.282440167036839
+      },
+      "remote_worker_startup_seconds": 5.260585916927084,
+      "remote_direct_seconds": 1.2822991659631953,
+      "remote_profile_seconds": 1.3095152910100296,
+      "builds": {
+        "Mac": {
+          "version": "0.2.0",
+          "kind": "cuda-inputs-only",
+          "model": "RE",
+          "input_module_sha256": "3cff990dfce48816fb1a1b16088e88859f701ed1e53e0aeafec3d0bfc870550c",
+          "source_sha256": {
+            "src/fortran/base_lib.f90": "927d2f1fe6b57debed8a394ec05989173a8b750dfb62a31b5689b10ae1d168e0",
+            "src/fortran/RE/diag_firms_solve.f90": "328759c422b2700d101bce618c938123e0a016908722ed01f1eda2ab852a060f",
+            "src/fortran/prepare_cuda_inputs.F90": "79fad69c559dea3225a9f7fdaebd2ddd8fd8523d2d52f2bb0d1f0ffa72e294a9",
+            "src/cuda/re_native_parallel.cu": "10a9110e05e0da5cd66aef1739151c809dff23c83da06114a7c949df3afa7bbc",
+            "src/cuda/re_action_block_reduce.cu": "34efd700398828afac646cb3365787f431159984c4e6c605162639fd916434d2",
+            "src/cuda/re_simulation_parallel.cu": "9b4bf260f13d1aca37cd67490243915f20c8c22852c58592e39d7623fd90e398"
+          },
+          "binary_sha256": {
+            "prepare-inputs": "7dd7142ed3a184c83410d6a695a7b9ccf9054480e3b472033aa0834215d5c673"
+          },
+          "Fortran_compiler": "GNU Fortran (GCC) 14.2.0\nCopyright (C) 2024 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+          "Fortran_flags": [
+            "-O3",
+            "-funroll-loops",
+            "-fopenmp",
+            "-m64",
+            "-B<compiler-libexec>/"
+          ],
+          "CUDA_flags": [
+            "-O3",
+            "-std=c++17",
+            "--default-stream",
+            "per-thread",
+            "--fmad=false",
+            "--prec-div=true",
+            "--prec-sqrt=true",
+            "-Xcompiler=-pthread",
+            "-Xcompiler=-ffp-contract=off",
+            "-Xcompiler=-fno-fast-math",
+            "-Xcompiler=-march=native",
+            "-arch=sm_80"
+          ],
+          "CUDA_compiler": null
+        },
+        "Linux": {
+          "version": "0.2.0",
+          "kind": "cuda-pipeline",
+          "model": "RE",
+          "input_module_sha256": "3cff990dfce48816fb1a1b16088e88859f701ed1e53e0aeafec3d0bfc870550c",
+          "source_sha256": {
+            "src/fortran/base_lib.f90": "927d2f1fe6b57debed8a394ec05989173a8b750dfb62a31b5689b10ae1d168e0",
+            "src/fortran/RE/diag_firms_solve.f90": "328759c422b2700d101bce618c938123e0a016908722ed01f1eda2ab852a060f",
+            "src/fortran/prepare_cuda_inputs.F90": "79fad69c559dea3225a9f7fdaebd2ddd8fd8523d2d52f2bb0d1f0ffa72e294a9",
+            "src/cuda/re_native_parallel.cu": "10a9110e05e0da5cd66aef1739151c809dff23c83da06114a7c949df3afa7bbc",
+            "src/cuda/re_action_block_reduce.cu": "34efd700398828afac646cb3365787f431159984c4e6c605162639fd916434d2",
+            "src/cuda/re_simulation_parallel.cu": "9b4bf260f13d1aca37cd67490243915f20c8c22852c58592e39d7623fd90e398"
+          },
+          "binary_sha256": {
+            "prepare-inputs": "5c0487159ae11ace59677a098046674dd9b089ff7da355afd1f65891abc3af43",
+            "evaluate-cuda": "6fc80edf02f6a3a3e6e16ccc0313f5d56d12f5d55047a176f3ddf0939be88cfe"
+          },
+          "Fortran_compiler": "GNU Fortran (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0\nCopyright (C) 2021 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+          "Fortran_flags": [
+            "-O3",
+            "-funroll-loops",
+            "-fopenmp",
+            "-m64"
+          ],
+          "CUDA_flags": [
+            "-O3",
+            "-std=c++17",
+            "--default-stream",
+            "per-thread",
+            "--fmad=false",
+            "--prec-div=true",
+            "--prec-sqrt=true",
+            "-Xcompiler=-pthread",
+            "-Xcompiler=-ffp-contract=off",
+            "-Xcompiler=-fno-fast-math",
+            "-Xcompiler=-march=native",
+            "-arch=sm_80"
+          ],
+          "CUDA_compiler": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2024 NVIDIA Corporation\nBuilt on Thu_Mar_28_02:18:24_PDT_2024\nCuda compilation tools, release 12.4, V12.4.131\nBuild cuda_12.4.r12.4/compiler.34097967_0\n"
+        }
+      },
+      "remote_profile_selection_comparison": "IEEE binary64 bit comparison of sigma, objective, moments, candidate sigmas and candidate objectives; all equal."
+    },
+    {
+      "model": "DE",
+      "input_files_bit_identical": 12,
+      "input_files_compared": 12,
+      "identical_input_direct_comparison": {
+        "direct_entries": 4109423,
+        "direct_bit_mismatches": 0
+      },
+      "remote_profile_basis": [
+        {
+          "name": "m0",
+          "entries": 17,
+          "bit_mismatches": 0
+        },
+        {
+          "name": "mp",
+          "entries": 17,
+          "bit_mismatches": 0
+        },
+        {
+          "name": "mm",
+          "entries": 17,
+          "bit_mismatches": 0
+        },
+        {
+          "name": "c1",
+          "entries": 17,
+          "bit_mismatches": 0
+        },
+        {
+          "name": "c2",
+          "entries": 17,
+          "bit_mismatches": 0
+        }
+      ],
+      "remote_profile_selection_equal": {
+        "sigma_pi": true,
+        "objective": true,
+        "moments": true,
+        "candidate_sigmas": true
+      },
+      "warm_remote_search": {
+        "status": "evaluation_budget_reached",
+        "attempted_evaluations": 10,
+        "completed_evaluations": 10,
+        "unique_policy_vectors": 10,
+        "generations_completed": 1,
+        "search_seconds": 8.826822165981866
+      },
+      "remote_worker_startup_seconds": 5.135080417036079,
+      "remote_direct_seconds": 1.8308515830431134,
+      "remote_profile_seconds": 1.7000890000490472,
+      "builds": {
+        "Mac": {
+          "version": "0.2.0",
+          "kind": "cuda-inputs-only",
+          "model": "DE",
+          "input_module_sha256": "0ba0683964ea11daa43256fda3513d55f730e454bc069850c974020dc63b8bc3",
+          "source_sha256": {
+            "src/fortran/base_lib.f90": "927d2f1fe6b57debed8a394ec05989173a8b750dfb62a31b5689b10ae1d168e0",
+            "src/fortran/DE/diag_firms_solve.f90": "b40e847f0a57d8193d1b8021e1a6a80809fef0cfa47274a16289cd693d7611c9",
+            "src/fortran/prepare_cuda_inputs.F90": "79fad69c559dea3225a9f7fdaebd2ddd8fd8523d2d52f2bb0d1f0ffa72e294a9",
+            "src/cuda/de_native_simulation_parallel.cu": "b4632237f0d9f1a101a8ca060fdb7a6e888dfa249711dec6b65165e8481fd759",
+            "src/cuda/de_action_block_reduce.cu": "386c9bae5f9714f930cf012d73ba250f074747f50f16f08cad39488745bd6e24",
+            "src/cuda/de_simulation_parallel.cu": "d4c98f044220c84bf52b04bbee64589c440b97979137e02f224c83a78a64c392"
+          },
+          "binary_sha256": {
+            "prepare-inputs": "a2fbdbabee09c8dbc45907ee2a1f6b7fd6bbe3922f90cabcb8898f8b91a84cc5"
+          },
+          "Fortran_compiler": "GNU Fortran (GCC) 14.2.0\nCopyright (C) 2024 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+          "Fortran_flags": [
+            "-O3",
+            "-funroll-loops",
+            "-fopenmp",
+            "-m64",
+            "-B<compiler-libexec>/"
+          ],
+          "CUDA_flags": [
+            "-O3",
+            "-std=c++17",
+            "--default-stream",
+            "per-thread",
+            "--fmad=false",
+            "--prec-div=true",
+            "--prec-sqrt=true",
+            "-Xcompiler=-pthread",
+            "-Xcompiler=-ffp-contract=off",
+            "-Xcompiler=-fno-fast-math",
+            "-Xcompiler=-march=native",
+            "-arch=sm_80"
+          ],
+          "CUDA_compiler": null
+        },
+        "Linux": {
+          "version": "0.2.0",
+          "kind": "cuda-pipeline",
+          "model": "DE",
+          "input_module_sha256": "0ba0683964ea11daa43256fda3513d55f730e454bc069850c974020dc63b8bc3",
+          "source_sha256": {
+            "src/fortran/base_lib.f90": "927d2f1fe6b57debed8a394ec05989173a8b750dfb62a31b5689b10ae1d168e0",
+            "src/fortran/DE/diag_firms_solve.f90": "b40e847f0a57d8193d1b8021e1a6a80809fef0cfa47274a16289cd693d7611c9",
+            "src/fortran/prepare_cuda_inputs.F90": "79fad69c559dea3225a9f7fdaebd2ddd8fd8523d2d52f2bb0d1f0ffa72e294a9",
+            "src/cuda/de_native_simulation_parallel.cu": "b4632237f0d9f1a101a8ca060fdb7a6e888dfa249711dec6b65165e8481fd759",
+            "src/cuda/de_action_block_reduce.cu": "386c9bae5f9714f930cf012d73ba250f074747f50f16f08cad39488745bd6e24",
+            "src/cuda/de_simulation_parallel.cu": "d4c98f044220c84bf52b04bbee64589c440b97979137e02f224c83a78a64c392"
+          },
+          "binary_sha256": {
+            "prepare-inputs": "08ee0b5a9ef092d73b6e85f46aceeca8e7410529a42f7e62de68123b4fa76b71",
+            "evaluate-cuda": "35e9fb7716c6913175c97fcdbba3fa1c779797666d9c62b7657a47550dc6b1ed"
+          },
+          "Fortran_compiler": "GNU Fortran (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0\nCopyright (C) 2021 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+          "Fortran_flags": [
+            "-O3",
+            "-funroll-loops",
+            "-fopenmp",
+            "-m64"
+          ],
+          "CUDA_flags": [
+            "-O3",
+            "-std=c++17",
+            "--default-stream",
+            "per-thread",
+            "--fmad=false",
+            "--prec-div=true",
+            "--prec-sqrt=true",
+            "-Xcompiler=-pthread",
+            "-Xcompiler=-ffp-contract=off",
+            "-Xcompiler=-fno-fast-math",
+            "-Xcompiler=-march=native",
+            "-arch=sm_80"
+          ],
+          "CUDA_compiler": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2024 NVIDIA Corporation\nBuilt on Thu_Mar_28_02:18:24_PDT_2024\nCuda compilation tools, release 12.4, V12.4.131\nBuild cuda_12.4.r12.4/compiler.34097967_0\n"
+        }
+      },
+      "remote_profile_selection_comparison": "IEEE binary64 bit comparison of sigma, objective, moments, candidate sigmas and candidate objectives; all equal."
+    }
+  ],
+  "scheduler_tests": {
+    "passed": 5,
+    "scope": "Protocol lifecycle, exact budget prefix, failure records, and serial-deferred versus vectorized-deferred test-objective trajectory."
+  },
+  "engineering_search": {
+    "seed": 20261101,
+    "initial_population": 5,
+    "generation_updates": 1,
+    "evaluations_per_model": 10,
+    "unique_vectors_per_model": 10,
+    "purpose": "Pipeline mechanics only; no scientific endpoint or convergence claim",
+    "domain": "Per-coordinate half width 0.001 times max(abs(anchor coordinate), 0.01), centered on the packaged fixed verification policy vector.",
+    "sigma_bounds": [
+      0,
+      1.5
+    ],
+    "strategy": "best1bin",
+    "updating": "deferred",
+    "polish": false,
+    "tol": 0,
+    "atol": 0,
+    "moment_indices": "2 through 17",
+    "fixed_inputs": "Unchanged packaged fixed inputs and full simulation grids.",
+    "timing": "One observation per model, warm workers; input construction, hashing, transfer, CUDA solve, CPU finishing/profile/optimizer included. Worker setup, build, initial imports and shutdown excluded."
+  },
+  "limitations": [
+    "No matched end-to-end CPU search benchmark; no complete-search speedup claimed.",
+    "Fixed-vector agreement does not prove equality over arbitrary search domains.",
+    "Ten-candidate neighborhood smoke searches are not economic estimates or global-coverage evidence.",
+    "These timing observations precede the final numerical-finishing layer; no current complete-search speedup is inferred."
+  ],
+  "cloud": {
+    "terminated": true,
+    "account_pods_after_termination": 0,
+    "estimated_new_compute_usd": 0.5093061407321029,
+    "estimated_cumulative_compute_usd": 4.867590140732103,
+    "budget_usd": 10,
+    "billing_scope": "Elapsed-time compute estimate, not a retrieved invoice."
+  },
+  "stage": "Historical initial integration, before the final local numerical-finishing layer",
+  "superseded_by": "cuda-coverage-v020.json"
+}

@@ -2,7 +2,7 @@ cff-version: 1.2.0
 message: "Please cite this toolkit when publishing scientific results obtained with it, and cite the original Real Credit Cycles paper when using its model. See LICENSE for the citation condition."
 type: software
 title: "Faster Firm Dynamics: Algorithms and Implementation Techniques for Accelerating Heterogeneous-Firm Models"
-version: 0.1.0
+version: 0.2.0
 authors:
   - family-names: Jiang
     given-names: "Jiannan (Jay)"

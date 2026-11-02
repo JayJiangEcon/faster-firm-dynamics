@@ -1,9 +1,40 @@
 # Performance measurements
 
+Version 0.2.0: see [CUDA pipeline timing](cuda-pipeline.md) and the
+[measured validation report](cuda-validation-v020.md).
+
+## Initial pipeline timing before final numerical finishing
+
+These existing November 1, 2026 observations precede the final local numerical
+finishing layer. They are historical integration timings, not current final
+version measurements. They use Mac input construction and
+search control with an A100-SXM4-80GB worker over SSH. Each small run evaluated
+ten different candidates: five initial candidates and one generation of five.
+
+| Timing scope | RE | DE |
+|---|---:|---:|
+| Worker setup and shared-input transfer | 5.261 s | 5.135 s |
+| Warm 10-candidate search | 3.282 s | 8.827 s |
+
+The search row includes parameter-dependent input construction, input hashes,
+network transfer, CUDA solution, CPU simulation finishing, conditional selection
+and optimizer work. It excludes setup, build, initial imports and shutdown.
+The setup row excludes some CLI initialization and is not a complete cold-start
+measurement. There is one observation per model and no matched CPU search
+comparison. The [initial structured record](../results/cuda-validation-v020.json) preserves
+the design and build identities. The [final verification](cuda-validation-v020.md)
+uses 28 points per model with output dumps and is not a new speed benchmark.
+
+The earlier [repeated-vector GPU throughput measurements](gpu-v010.md#overall-speed-relative-to-the-original-m3-baseline)
+use pre-exported inputs. Keep those observations separate from these search
+runs and from the original-code CPU comparison in the README.
+
+## Historical CPU measurements
+
 The main comparison set was recorded on September 4–5, 2026; foundational
 and optional historical observations below also cover September 1–2.
-They are reused for this toolkit. No new numerical evaluation was run
-during its preparation.
+These historical CPU observations were reused without rerunning them. New
+CUDA pipeline observations are documented separately above.
 
 The [README technique guide](../README.md#techniques-measured-gains-and-numerical-agreement)
 also covers the initial elimination of redundant Fortran computation,
@@ -232,3 +263,12 @@ out a parameter. A reduction in coordinate count alone does not determine
 that speedup for an adaptive search. The finite bitwise comparisons and the
 small state-collapse/profile reconstruction differences are documented in
 [Numerical accuracy](accuracy.md).
+
+## CUDA throughput relative to the original CPU baseline
+
+The same fixed benchmark vectors now have separate cold-single and repeated-batch
+A100 measurements. See [the cumulative GPU timing table](gpu.md#overall-speed-relative-to-the-original-m3-baseline)
+for the 24,700–35,600× RE and approximately 3,300× DE equivalent evaluation-throughput
+ratios, their original M3 baseline, and the excluded input-preparation costs.
+These figures include hardware and batch parallelism; they are not full-search
+speedups and do not replace the CPU-only comparisons above.

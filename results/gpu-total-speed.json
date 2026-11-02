@@ -1,0 +1,167 @@
+{
+  "date": "2026-11-01",
+  "experiment": "Fixed-anchor cold process latency and repeated independent-solve throughput",
+  "new_GPU_processes": 4,
+  "new_GPU_evaluations": 82,
+  "unique_vectors_per_model": 1,
+  "new_original_CPU_evaluations": 0,
+  "timing_aggregation": "One observation per declared workload. Original CPU observations reused from the existing baseline record.",
+  "GPU": "A100-SXM4-80GB",
+  "CPU_baseline": "Original unmodified solver on an eight-core MacBook Air M3",
+  "input_preparation": "The supplied fixture exporter performs a complete CPU solve for each new parameter vector to construct reference outputs as well as inputs. GPU timings exclude this full CPU export and network transfer.",
+  "single_job_scope": "Includes CUDA context setup, comparisons and full array dump writes.",
+  "batch_scope": "Separate cold initialization and convergence per job in one process, pre-exported fixed inputs, no full array dump writes. Repeated identical points do not establish diverse-search throughput.",
+  "ratio_definition": "original CPU seconds per evaluation divided by observed GPU batch wall seconds per evaluation",
+  "limits": [
+    "Combines implementation, hardware and batch parallelism.",
+    "Not a complete parameter-to-moments frontend or a full-search speedup.",
+    "No additional multiplier for parameter profiling.",
+    "Original CPU measurements are from prior dates; original N-job batches were not rerun.",
+    "Finite fixed-point numerical agreement; no domain-wide or cross-architecture guarantee."
+  ],
+  "workloads": [
+    {
+      "model": "RE",
+      "jobs": 1,
+      "unique_vectors": 1,
+      "workers": 1,
+      "wall_seconds": 1.1541521679610014,
+      "seconds_per_evaluation": 1.1541521679610014,
+      "binary_sha256": "467f32b81afbc814961a63fdd6af749b8f49f4ec6d5d9e87ecb00c32d84ef5bf",
+      "original_M3_seconds_range": [
+        873.49,
+        1258.2728
+      ],
+      "equivalent_throughput_ratio_range": [
+        756.8239476976099,
+        1090.213955255956
+      ],
+      "mismatches": {
+        "array_bit_mismatches": 0,
+        "endogenous_path_bit_mismatches": 0,
+        "capital_path_bit_mismatches": 0,
+        "debt_path_bit_mismatches": 0,
+        "investment_path_bit_mismatches": 0,
+        "measured_profit_bit_mismatches": 0,
+        "forecast_profit_bit_mismatches": 0,
+        "spread_path_bit_mismatches": 0,
+        "moment_bit_mismatches": 0,
+        "output_bit_mismatches": 0,
+        "macro_default_bit_mismatches": 0,
+        "macro_spread_bit_mismatches": 0
+      }
+    },
+    {
+      "model": "DE",
+      "jobs": 1,
+      "unique_vectors": 1,
+      "workers": 1,
+      "wall_seconds": 1.1591747228521854,
+      "seconds_per_evaluation": 1.1591747228521854,
+      "binary_sha256": "37e9f4bcb4b2ffdcdec60c31ce71ce216bc9de54546455472d415b9c6b9489c7",
+      "original_M3_seconds_range": [
+        792.1285,
+        794.42
+      ],
+      "equivalent_throughput_ratio_range": [
+        683.3555670114539,
+        685.3324044586694
+      ],
+      "mismatches": {
+        "array_bit_mismatches": 0,
+        "endogenous_path_bit_mismatches": 0,
+        "capital_path_bit_mismatches": 0,
+        "debt_path_bit_mismatches": 0,
+        "investment_path_bit_mismatches": 0,
+        "measured_profit_bit_mismatches": 0,
+        "forecast_profit_bit_mismatches": 0,
+        "spread_path_bit_mismatches": 0,
+        "moment_bit_mismatches": 0,
+        "output_bit_mismatches": 0,
+        "macro_default_bit_mismatches": 0,
+        "macro_spread_bit_mismatches": 0
+      }
+    },
+    {
+      "model": "RE",
+      "jobs": 48,
+      "unique_vectors": 1,
+      "workers": 8,
+      "wall_seconds": 1.697468550875783,
+      "seconds_per_evaluation": 0.03536392814324548,
+      "binary_sha256": "467f32b81afbc814961a63fdd6af749b8f49f4ec6d5d9e87ecb00c32d84ef5bf",
+      "original_M3_seconds_range": [
+        873.49,
+        1258.2728
+      ],
+      "equivalent_throughput_ratio_range": [
+        24700.027566559707,
+        35580.685349863496
+      ],
+      "mismatches": {
+        "array_bit_mismatches": 0,
+        "endogenous_path_bit_mismatches": 0,
+        "capital_path_bit_mismatches": 0,
+        "debt_path_bit_mismatches": 0,
+        "investment_path_bit_mismatches": 0,
+        "measured_profit_bit_mismatches": 0,
+        "forecast_profit_bit_mismatches": 0,
+        "spread_path_bit_mismatches": 0,
+        "moment_bit_mismatches": 0,
+        "output_bit_mismatches": 0,
+        "macro_default_bit_mismatches": 0,
+        "macro_spread_bit_mismatches": 0
+      }
+    },
+    {
+      "model": "DE",
+      "jobs": 32,
+      "unique_vectors": 1,
+      "workers": 4,
+      "wall_seconds": 7.692746404092759,
+      "seconds_per_evaluation": 0.24039832512789872,
+      "binary_sha256": "37e9f4bcb4b2ffdcdec60c31ce71ce216bc9de54546455472d415b9c6b9489c7",
+      "original_M3_seconds_range": [
+        792.1285,
+        794.42
+      ],
+      "equivalent_throughput_ratio_range": [
+        3295.066634006561,
+        3304.598730366969
+      ],
+      "mismatches": {
+        "array_bit_mismatches": 0,
+        "endogenous_path_bit_mismatches": 0,
+        "capital_path_bit_mismatches": 0,
+        "debt_path_bit_mismatches": 0,
+        "investment_path_bit_mismatches": 0,
+        "measured_profit_bit_mismatches": 0,
+        "forecast_profit_bit_mismatches": 0,
+        "spread_path_bit_mismatches": 0,
+        "moment_bit_mismatches": 0,
+        "output_bit_mismatches": 0,
+        "macro_default_bit_mismatches": 0,
+        "macro_spread_bit_mismatches": 0
+      }
+    }
+  ],
+  "independent_single_job_comparisons": {
+    "RE": {
+      "entries": 329423,
+      "bit_mismatches": 0
+    },
+    "DE": {
+      "entries": 4109423,
+      "bit_mismatches": 0
+    }
+  },
+  "baseline_record_sha256": "c1ea4f0ed26f76b0a129108a1248fd4354d287214f3662045e6296389cfb7baf",
+  "search_integration": {
+    "production_evaluator_without_CPU_reference_outputs": false,
+    "parameter_input_construction_without_CPU_solve": false,
+    "GPU_sigma_profile_objective": false,
+    "GPU_search_driver": false,
+    "end_to_end_search_speedup_measured": false,
+    "current_search_update": "immediate; generation batching would require deferred semantics or independent search trajectories"
+  }
+}

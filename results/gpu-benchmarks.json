@@ -1,0 +1,125 @@
+{
+  "date": "2026-11-01",
+  "hardware": {
+    "gpu": "NVIDIA A100-SXM4-80GB",
+    "cpu": "AMD EPYC 7742",
+    "cpu_quota_equivalents": 13.6,
+    "cuda": "12.4.131",
+    "driver": "595.91.07"
+  },
+  "timing_scope": "Full GPU process wall time including fixture reads and validation; CPU fixture export excluded. Predecessor GPU comparators, not original Fortran baselines.",
+  "RE": {
+    "unique_parameter_vectors": 3,
+    "paired_means": {
+      "re_serial-w1": {
+        "wall_seconds": 3.0694200310390443
+      },
+      "re_native_parallel-w1": {
+        "wall_seconds": 1.6042161129880697,
+        "policy_seconds": 0.329194736,
+        "finish_wall_seconds": 0.46588553899999996
+      },
+      "re_native_parallel-w4": {
+        "wall_seconds": 1.2718188425060362,
+        "policy_seconds": 0.3292111175,
+        "finish_wall_seconds": 0.243753379
+      }
+    },
+    "batch_timings": [
+      {
+        "label": "re-pair-re_serial-1-0",
+        "jobs": 12,
+        "workers": 1,
+        "wall_seconds": 3.10757053992711
+      },
+      {
+        "label": "re-pair-re_native_parallel-1-0",
+        "jobs": 12,
+        "workers": 1,
+        "wall_seconds": 1.5986212510615587
+      },
+      {
+        "label": "re-pair-re_native_parallel-4-0",
+        "jobs": 12,
+        "workers": 4,
+        "wall_seconds": 1.3040935550816357
+      },
+      {
+        "label": "re-pair-re_serial-1-1",
+        "jobs": 12,
+        "workers": 1,
+        "wall_seconds": 3.0312695221509784
+      },
+      {
+        "label": "re-pair-re_native_parallel-1-1",
+        "jobs": 12,
+        "workers": 1,
+        "wall_seconds": 1.6098109749145806
+      },
+      {
+        "label": "re-pair-re_native_parallel-4-1",
+        "jobs": 12,
+        "workers": 4,
+        "wall_seconds": 1.2395441299304366
+      },
+      {
+        "label": "re-native-final",
+        "jobs": 12,
+        "workers": 4,
+        "wall_seconds": 1.2642095969058573
+      },
+      {
+        "label": "re-native-scale24",
+        "jobs": 24,
+        "workers": 4,
+        "wall_seconds": 1.6295101922005415
+      },
+      {
+        "label": "re-native-scale48-4",
+        "jobs": 48,
+        "workers": 4,
+        "wall_seconds": 2.023080992978066
+      },
+      {
+        "label": "re-native-scale48-8",
+        "jobs": 48,
+        "workers": 8,
+        "wall_seconds": 1.7064468800090253
+      }
+    ],
+    "compared_entries": 3953076,
+    "bit_mismatches": 0
+  },
+  "DE": {
+    "unique_parameter_vectors": 2,
+    "predecessor": {
+      "processes": 4,
+      "process_mean_seconds": 3.1598350144922733,
+      "finish_mean_seconds": 0.59136577625,
+      "policy_mean_seconds": 1.69701707075
+    },
+    "parallel": {
+      "processes": 4,
+      "process_mean_seconds": 2.8193869535462,
+      "finish_mean_seconds": 0.3022525585,
+      "policy_mean_seconds": 1.68400178725
+    },
+    "scaling": [
+      {
+        "label": "sim-parallel-large-16",
+        "wall_seconds": 4.514307075878605,
+        "jobs": 16,
+        "evaluations_per_second": 3.5442870259077295
+      },
+      {
+        "label": "sim-parallel-large-32",
+        "wall_seconds": 7.64344899286516,
+        "jobs": 32,
+        "evaluations_per_second": 4.186591685228836
+      }
+    ],
+    "compared_entries": 32875384,
+    "bit_mismatches": 0
+  },
+  "interpretation": "Repeated points test throughput and isolation, not broader parameter coverage."
+}

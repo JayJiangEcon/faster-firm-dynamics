@@ -10,7 +10,8 @@ Review* in 2026.
 For a sense of the computational scale, the authors' accompanying documentation
 reports approximately two weeks to generate the complete model output from
 scratch on a 2023 Mac Studio with an Apple M2 Ultra chip and 128 GB of memory.
-Our development and measurements use an eight-core MacBook Air M3.
+Our CPU development and measurements use an eight-core MacBook Air M3; the
+CUDA benchmarks use an NVIDIA A100-SXM4-80GB.
 
 The baseline for the speed comparison is the original, unmodified solver
 running on my MacBook Air M3. At the same fixed complete parameter vectors,
@@ -20,6 +21,12 @@ direct implementations recorded medians of 0.6423 seconds and 6.9618 seconds
 over three evaluations, respectively. Relative to those medians, the original
 observations imply approximately **1,360–1,960× for RE and 114× for DE**, before
 adding any benefit from reducing the parameter-search dimension.
+
+With a single A100 GPU, we achieve **equivalent evaluation-throughput gains
+of 24,700–35,600× for RE and approximately 3,300× for DE** relative to the
+original solver on my MacBook Air M3. Pointwise numerical agreement remains
+supported by the recorded comparisons, including the final pipeline checks
+at 28 distinct policy vectors per model.
 
 Beyond these gains, **profiling the measurement-noise parameter reduces the outer
 search from nine to eight coordinates for RE and from ten to nine for DE.**
@@ -41,9 +48,8 @@ its contribution has been immense.
 I have decided to make these algorithms and their implementation publicly
 available. As time and opportunities permit, I hope to continue this work by:
 
-1. Developing a version accelerated by CUDA GPUs.
-2. Explaining the core techniques in greater detail.
-3. Conducting more comprehensive validation.
+1. Explaining the core techniques in greater detail.
+2. Conducting more comprehensive validation.
 
 I nevertheless reserve the right to publish this work as an academic paper
 in the future.
@@ -56,6 +62,11 @@ A: Simply ask your AI agent:
 > please analyze which ideas could be applied to the structural model we are
 > currently working with.
 
+Through this project, I hope to demonstrate the substantial potential of
+generative AI to accelerate algorithms and encourage others to explore it.
+My hope is that the economics community can use generative AI with confidence
+to conduct better and faster economic research.
+
 The rest of this README was written by AI, and I have not fully checked every
 detail. I recommend using AI to help read and use this project. The AI-written
 documentation follows.
@@ -64,7 +75,7 @@ documentation follows.
 
 **Algorithms and Implementation Techniques for Accelerating Heterogeneous-Firm Models**
 
-Version 0.1.0
+Version 0.2.0
 
 This toolkit brings together algorithms and implementation techniques for
 solving heterogeneous-firm dynamic models faster while preserving numerical
@@ -93,14 +104,15 @@ are documented alongside each method.
 
 | Material | Entry point |
 | --- | --- |
-| Algorithm descriptions | [Algorithms](docs/algorithms.md) |
+| Algorithm descriptions | [Core techniques below](#techniques-measured-gains-and-numerical-agreement), [Algorithms](docs/algorithms.md) |
 | Existing timing measurements | [Performance](docs/benchmarks.md) |
 | Numerical agreement and rounding differences | [Numerical accuracy](docs/accuracy.md) |
 | Build and execution instructions | [Usage](docs/usage.md) |
 | Complete integrated solver sources | [Fortran source directory](src/fortran/) |
-| Conditional minimization and outer search | [Profile selection](sigma_profile.py), [search](search.py) |
+| Conditional minimization and outer search | [Profile selection](sigma_profile.py), [CPU search](search.py), [CUDA search](gpu.py) |
 | Source and fixed-input identities | [Integrated manifest](results/integrated-manifest.json) |
-| Structured measurements | [Timings](results/benchmarks.json), [accuracy](results/accuracy.json) |
+| Structured measurements | [CPU timings](results/benchmarks.json), [CPU accuracy](results/accuracy.json), [CUDA 0.2.0](results/cuda-coverage-v020.json) |
+| Version 0.2.0: CUDA search pipeline | [Techniques and coverage below](#version-020-cuda-search-pipeline), [Pipeline guide](docs/cuda-pipeline.md), [CUDA source](src/cuda/) |
 
 The implementation combines state reduction, action envelopes, sparse winner
 selection, certified block skipping, reachable-state fixed-policy iteration,
@@ -122,6 +134,9 @@ adopted computational layers and the fused conditional moment calculation.
 minimization. [search.py](search.py) connects the conditional evaluator to an
 outer search over user-specified bounds and a declared evaluation budget.
 The objective is the weighted quadratic moment distance, using moments 2–17.
+[gpu.py](gpu.py) supplies the batch-oriented CUDA pipeline. Its deferred
+optimizer updates differ from the CPU driver's immediate updates; they need
+not follow the same search trajectory.
 
 | Algorithm | Implementation location |
 | --- | --- |
@@ -131,7 +146,11 @@ The objective is the weighted quadratic moment distance, using moments 2–17.
 | Action envelopes, reachable-state updates, sparse winners and block skipping | [RE](src/fortran/RE/diag_firms_solve.f90) and [DE](src/fortran/DE/diag_firms_solve.f90): `politeration` |
 | Grouped Howard, common-default calculations, buffer exchange and direct action-data handling | [DE solver](src/fortran/DE/diag_firms_solve.f90): `politeration` |
 | Conditional moment basis and fused traversals | [RE](src/fortran/RE/diag_firms_solve.f90) and [DE](src/fortran/DE/diag_firms_solve.f90): `simulate`, `profile_sigma_micro_moments` |
-| Conditional selection and outer search | [sigma_profile.py](sigma_profile.py), [search.py](search.py) |
+| Conditional selection and CPU outer search | [sigma_profile.py](sigma_profile.py), [search.py](search.py) |
+| CUDA batch search and worker orchestration | [gpu.py](gpu.py), [cuda_pipeline.py](cuda_pipeline.py) |
+| Input-only construction | [prepare_cuda_inputs.F90](src/fortran/prepare_cuda_inputs.F90) |
+| Mac numerical finishing | [finalize_numeric.f90](src/fortran/finalize_numeric.f90) |
+| CUDA model solution and parallel simulation | [RE backend](src/cuda/re_native_parallel.cu), [DE backend](src/cuda/de_native_simulation_parallel.cu) |
 
 The [integrated manifest](results/integrated-manifest.json) binds the packaged
 Fortran sources and fixed inputs. The [measurement source record](results/measurement-sources.json)
@@ -177,7 +196,7 @@ speedups in technique 14 concern the evaluator itself.
 ## Techniques, measured gains, and numerical agreement
 
 All numbers below come from existing measurements recorded on September 1–5,
-2026. This documentation update ran no numerical experiments. The recorded
+2026. These CPU measurements were reused without rerunning them. The recorded
 CPU environment used Apple M3 and GNU Fortran 14.2.0. Later optimized
 comparisons used eight OpenMP threads; the first technique has the historical
 thread-setting limitation described below. For the later comparisons,
@@ -652,6 +671,152 @@ universal guarantee across parameter values, compilers, or architectures.
 See [numerical accuracy](docs/accuracy.md) for the evidence map and
 [performance](docs/benchmarks.md) for timing designs and other measured variants.
 
+## Version 0.2.0: CUDA search pipeline
+
+**A complete CUDA-oriented pipeline, from parameter search to core model solution.**
+
+A deferred population search proposes a batch of candidates. A persistent input
+worker constructs their grids, transitions and fixed-draw paths; the CUDA worker
+solves their policies and distributions and runs the required simulations.
+Local numerical finishing and conditional measurement-noise minimization then
+return an ordered objective vector to the optimizer. The workers remain available for the next generation.
+Each candidate starts an independent cold model solve.
+
+The pipeline combines the existing GPU techniques with:
+
+- Input construction that requires no preliminary CPU policy solve.
+- Production evaluation without CPU reference solution arrays.
+- One policy solve for the three conditional moment-basis evaluations.
+- Mac numerical finishing that preserves the macro statistic and direct-objective arithmetic.
+- Ordered batch results, explicit evaluation budgets and deferred search updates.
+- SSH execution with input construction, conditional selection and search on the Mac.
+
+The measured Mac-to-A100 route preserves the tested Mac input and conditional
+selection paths. Across 28 distinct policy vectors per model, the twelve input
+files per point,
+all direct-output entries checked, and the conditional basis/selection outputs
+were bit-identical to their CPU references. See [numerical coverage and execution
+identities](docs/cuda-validation-v020.md) for the exact scope.
+
+| Final version 0.2.0 numerical comparison | RE | DE |
+|---|---:|---:|
+| Different policy vectors checked | 28 | 28 |
+| Direct-output entries checked | 9,223,844 | 115,063,844 |
+| Direct-output bit mismatches | 0 | 0 |
+| Direct objectives and conditional selections | All bit-identical | All bit-identical |
+
+The point set includes the original anchor, nine earlier operational-test
+candidates, sixteen points from two independent Sobol scrambles and two boundary
+checks. The same independently executed CPU references were reused throughout.
+The expanded checks found and resolved last-bit differences in numerical
+finishing. [The verification report](docs/cuda-validation-v020.md) states the
+point-selection rules, arithmetic changes and complete comparison scope.
+
+Earlier small-search timings are retained as [historical integration
+measurements](docs/benchmarks.md#initial-pipeline-timing-before-final-numerical-finishing).
+The final coverage run is not a performance benchmark or a full-search speedup
+measurement.
+
+Start with the [execution-path guide](docs/usage.md#choose-an-execution-path),
+then follow the [CUDA pipeline instructions](docs/cuda-pipeline.md). The entry
+point is [`gpu.py`](gpu.py); the persistent workers and transport are managed
+by [`cuda_pipeline.py`](cuda_pipeline.py).
+
+### 1. Batch independent candidates across the GPU
+
+Add a candidate dimension to the CUDA work grid so that multiple independent
+model solves share kernel launches. Each candidate retains its own buffers,
+stopping flags and cold initialization. The recorded RE 12-job comparison
+fell from 3.0694 seconds with serial GPU execution to 1.2718 seconds with the
+native batch and four finishing workers (**2.41×**). This is a combined backend
+comparison, not an isolated launch-overhead measurement.
+
+### 2. Retain CUDA workers and device allocations
+
+Keep the CUDA context, workers and allocation pool alive between search
+batches. This avoids repeating startup and allocation work for each generation;
+it does not reuse a different candidate's solved policy. There is no isolated
+speed multiplier for persistence in the final pipeline. Ordered responses and
+separate candidate storage preserve evaluation identity.
+
+### 3. Construct inputs without solving the model on the CPU
+
+A persistent Mac worker builds parameter-dependent grids, transitions,
+exogenous paths and action caches. Fixed draws and their normal transforms are
+loaded once; parameter-dependent inputs are rebuilt for every candidate.
+This removes the preliminary CPU policy solve from the production path.
+All **336 input files per model** matched the independent CPU references in
+the 28-point coverage. No separate incremental timing is claimed.
+
+### 4. Compact transitions and cooperate on action selection
+
+Store only the 25 possible transition successors and let GPU threads share
+independent action-screening work. Compact shortlists, sparse winners and
+active support reduce unnecessary action and state work. Final selection
+preserves the established tie rules and ordered FP64 accumulation. In an early
+RE three-job comparison, cooperative shortlisting reduced policy time from
+0.384 to 0.257 seconds (**1.49×**, one observation per variant). Compact
+transitions and sparse support have no separate additive speed claim.
+
+### 5. Group repeated Howard updates
+
+Represent repeated selected-action successor groups compactly for 99 Howard
+updates, then restore the full update. Each state's 25-term accumulation order
+is retained. For the recorded DE eight-job workload, Howard time fell from
+709.20 to 468.43 milliseconds (**1.51×**); complete-process time fell from
+3.222 to 3.087 seconds (**1.04×**). The stage gain is not the whole-model gain.
+
+### 6. Preserve distribution order while reusing adjacency
+
+Build stable destination adjacency and reuse allocations for distribution
+updates. This reduces setup and memory-management work while preserving the
+source order of each accumulation. Its numerical behavior is covered by the
+complete-array comparisons; no isolated speed multiplier was measured.
+
+### 7. Prune unused simulation work and finish candidates concurrently
+
+Compute the observation range required by the objective and skip exactly
+zero population mass. Retain every consumed observation in its original
+arithmetic order. Independent candidates then finish through separate host
+workers and per-thread CUDA streams. Recorded finishing times fell from
+0.591 to 0.302 seconds for DE (**1.96×**) and from 0.466 to 0.244 seconds for
+RE (**1.91×**). Observation pruning was already present in the comparator;
+these gains measure parallel finishing, not pruning.
+
+### 8. Share one policy solve across conditional measurement-noise evaluations
+
+Use the same policy and macro path for the zero, plus-one and minus-one
+measurement-noise lanes. Their moments define the polynomial minimized on
+the Mac over the declared interval, leaving eight outer RE coordinates and
+nine outer DE coordinates. The final checks cover all basis coefficients,
+candidate objectives and selected outputs. No additional GPU-profile speed
+multiplier has been measured.
+
+### 9. Preserve the Mac arithmetic in a small numerical finishing step
+
+Return the already computed 302-entry macro output path with each CUDA
+response. A small resident Mac Fortran library calculates growth variance and
+the direct weighted objective using the reference log implementation and
+reduction order. This resolved the last-bit differences found by the wider
+checks without moving policy solution or simulation back to the CPU. The
+final 28-point comparisons per model include this step; its incremental
+runtime has not been measured separately.
+
+### 10. Connect batches to deferred population search
+
+Freeze the population while proposing and evaluating one generation, then
+apply updates after the ordered batch results return. Explicit budgets and
+candidate ordering connect the optimizer to persistent workers. This exposes
+parallel work to the GPU; it changes scheduling relative to immediate-update
+search and does not promise the same optimization trajectory. No final
+end-to-end search speedup is inferred from the kernel throughput figures.
+
+The [GPU technique record](docs/gpu-v010.md#how-the-techniques-work) supplies
+the historical incremental measurements. These gains use different workloads
+and predecessors and must not be multiplied together. The
+[final verification report](docs/cuda-validation-v020.md) covers the integrated
+Mac → A100 → Mac pipeline, including complete solver and simulation outputs.
+
 ## Substantial contribution from GPT
 
 **GPT, used through Codex, made substantial contributions to algorithm
@@ -676,7 +841,7 @@ the template's origin and attribution of the underlying model software.
 The reference for this toolkit is:
 
 > Jiang, Jiannan (Jay). 2026. *Faster Firm Dynamics: Algorithms and Implementation
-> Techniques for Accelerating Heterogeneous-Firm Models.* Version 0.1.0.
+> Techniques for Accelerating Heterogeneous-Firm Models.* Version 0.2.0.
 > Software and accompanying methods, performance, and numerical accuracy
 > documentation.
 

@@ -2,8 +2,17 @@
 
 This document describes computational acceleration techniques and their
 implementation in the RE and DE pipelines of *Real Credit Cycles* (2026).
-Complete sources are in [`src/fortran/`](../src/fortran/). Their identities are
-in [`integrated-manifest.json`](../results/integrated-manifest.json).
+The integrated CPU sources are in [`src/fortran/`](../src/fortran/), with
+identities in [`integrated-manifest.json`](../results/integrated-manifest.json).
+CUDA sources are in [`src/cuda/`](../src/cuda/).
+
+Version 0.2.0 connects these computational layers to a batch-oriented search.
+The [search-to-kernel map](cuda-pipeline.md#from-search-to-gpu-kernels) explains
+candidate generation, parameter profiling, input construction, CUDA policy and
+distribution solution, simulation and objective calculation. The [GPU technique
+table](gpu-v010.md#how-the-techniques-work) describes the inherited kernel
+optimizations and their original measurements. [Version 0.2.0 validation](cuda-validation-v020.md)
+records the connected pipeline's measured scope.
 
 ### Eliminating redundant Fortran computation
 

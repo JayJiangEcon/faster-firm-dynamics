@@ -1,8 +1,28 @@
 # Build and run guide
 
+Version 0.2.0: see [CUDA build, evaluation and search](cuda-pipeline.md) and the
+[measured validation report](cuda-validation-v020.md).
+
 Run the commands from the repository root. The package includes complete
 Fortran source and the six fixed input files; no separate model-source package
 is needed for these examples.
+
+## Choose an execution path
+
+| Task | Entry point | Guide and numerical scope |
+|---|---|---|
+| CPU evaluation, profiling or serial search | `build.py`, `run.py`, `search.py` | Commands below; recorded Mac CPU comparisons in [accuracy](accuracy.md). |
+| CUDA search retaining the tested Mac input path | `gpu.py` with `--remote-host` | [Mac input construction and SSH execution](cuda-pipeline.md#keep-input-construction-on-the-validated-host); fixed-vector agreement is documented. |
+
+For the currently verified Mac-to-A100 configuration, keep input construction, numerical
+finishing, conditional selection and optimizer control on the Mac. The remote server owns
+the persistent CUDA worker. Every search must declare its own bounds, seed and
+evaluation budget. The example vectors are verification inputs, not a recommended
+search domain.
+
+Version 0.2.0 presents the Mac-to-GPU path as its CUDA workflow. The remaining
+commands on this page describe the CPU interface. CUDA commands,
+requirements, batch settings and output records are in the [pipeline guide](cuda-pipeline.md).
 
 ## Requirements
 

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "version": "0.1.0",
+  "version": "0.2.0",
   "models": {
     "RE": {
       "files": {
@@ -62,5 +62,7 @@
     "upifirmshocks2.txt": "bd74acb88b12842fa77446a7cd7922f7b619f756f8c6b976e2ab96dd228145b5",
     "_GMMdatamom.txt": "0db4d0af53ade4b66d14bbfdc8338ad4857797ab6df9631134b99f8ca1d26daf",
     "_GMMdatawgt.txt": "0222ec1525189cd826deb6b0677e02ceff6fc8153d2b775509a4b16e8f4631ef"
-  }
+  },
+  "component": "Unchanged integrated CPU solver and fixed inputs, retained in version 0.2.0.",
+  "inherited_component_version": "0.1.0"
 }

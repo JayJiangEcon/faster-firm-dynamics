@@ -1,0 +1,34 @@
+{
+  "python_syntax": "passed",
+  "CPU_exporter": {
+    "RE": {
+      "source_transform": "passed",
+      "compile": "passed",
+      "numerical_execution": false,
+      "source_sha256": "d2e0f53e5a33df3df258ce581d0401b41253e02a3bbf3437d7691ede043570cc"
+    },
+    "DE": {
+      "source_transform": "passed",
+      "compile": "passed",
+      "numerical_execution": false,
+      "source_sha256": "bb689b28a555417ac13b1db14329d16afc33aaca07b12528c7110009e75f9625"
+    }
+  },
+  "manifest_files_match": true,
+  "fixed_inputs_match": true,
+  "CUDA": {
+    "RE": {
+      "compiled": true,
+      "binary_sha256": "467f32b81afbc814961a63fdd6af749b8f49f4ec6d5d9e87ecb00c32d84ef5bf",
+      "argument_validation": "passed",
+      "numerical_execution": false
+    },
+    "DE": {
+      "compiled": true,
+      "binary_sha256": "37e9f4bcb4b2ffdcdec60c31ce71ce216bc9de54546455472d415b9c6b9489c7",
+      "argument_validation": "passed",
+      "numerical_execution": false
+    }
+  },
+  "scope": "Packaging checks only; finite numerical comparisons are recorded separately in gpu-benchmarks.json."
+}

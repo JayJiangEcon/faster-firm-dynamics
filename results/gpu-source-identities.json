@@ -1,0 +1,43 @@
+{
+  "date": "2026-11-01",
+  "sources": [
+    {
+      "file": "src/cuda/de_native_simulation_parallel.cu",
+      "measured_source_sha256": "9f236aab881361022dea7c5038bc3c3bca5d18e3c1164c12633e0aadc921b3cb",
+      "packaged_source_sha256": "9f236aab881361022dea7c5038bc3c3bca5d18e3c1164c12633e0aadc921b3cb",
+      "packaging_changes": "Require explicit economic parameter options; update the action-component header. Numerical kernels unchanged."
+    },
+    {
+      "file": "src/cuda/de_action_block_reduce.cu",
+      "measured_source_sha256": "dc26bb1cfc715cd097aae409304fd331db51285f5a5ac9693a7c4dcfb4e5fbb5",
+      "packaged_source_sha256": "080d52f6804f8101fecb583feb3eed8db97a251c736b5fcc43e6a78ec6781532",
+      "packaging_changes": "Require explicit economic parameter options; update the action-component header. Numerical kernels unchanged."
+    },
+    {
+      "file": "src/cuda/de_simulation_parallel.cu",
+      "measured_source_sha256": "3dde21854e8901159a80b97a2a952f8805650b5e304b02ef31cc59b86be451db",
+      "packaged_source_sha256": "5e4e961a51e41806d47cc0f266b655507aeeef1cbba6a47b668a1a6516b272d7",
+      "packaging_changes": "Require explicit economic parameter options; update the action-component header. Numerical kernels unchanged."
+    },
+    {
+      "file": "src/cuda/re_native_parallel.cu",
+      "measured_source_sha256": "cc5b38fa2929993b879ec5009ed5334f88d3ec9796e9b1fde06fb397ae0b6904",
+      "packaged_source_sha256": "cc5b38fa2929993b879ec5009ed5334f88d3ec9796e9b1fde06fb397ae0b6904",
+      "packaging_changes": "Require explicit economic parameter options; update the action-component header. Numerical kernels unchanged."
+    },
+    {
+      "file": "src/cuda/re_action_block_reduce.cu",
+      "measured_source_sha256": "bbaf437757446c94f277e24281cda746d44c37adbcfae01d6877a586128d4b5e",
+      "packaged_source_sha256": "6d82e241846cf917e144db0046e693d45bef17c07df0032abbbe6a873db6a04d",
+      "packaging_changes": "Require explicit economic parameter options; update the action-component header. Numerical kernels unchanged."
+    },
+    {
+      "file": "src/cuda/re_simulation_parallel.cu",
+      "measured_source_sha256": "2349a8327feca4c6f286da72be0dcf5d6f6aac902384aef551d2bc371b6f8c0c",
+      "packaged_source_sha256": "5ed70ec486f05b71aea3a7be7494b3556144d96489ee1156c21b430d3587b89a",
+      "packaging_changes": "Require explicit economic parameter options; update the action-component header. Numerical kernels unchanged."
+    }
+  ],
+  "version": "0.1.0",
+  "status": "Historical identities for the version 0.1.0 fixture workload; not the version 0.2.0 sources."
+}

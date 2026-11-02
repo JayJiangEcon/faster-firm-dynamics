@@ -1,8 +1,34 @@
 # Numerical accuracy
 
+Version 0.2.0: see [CUDA pipeline validation](cuda-pipeline.md) and the
+[measured validation report](cuda-validation-v020.md).
+
+## Final version 0.2.0: 28 points per model
+
+| Boundary | RE | DE |
+|---|---:|---:|
+| Distinct policy vectors checked | 28 | 28 |
+| Exactly matched input files | 336 | 336 |
+| Direct-output entries, including final pipeline moments | 9,223,844 | 115,063,844 |
+| Direct-output bit mismatches | 0 | 0 |
+| Basis/coefficient entries with exact agreement | 2,380 | 2,380 |
+| Direct objectives and every conditional candidate/selected output | All bit-identical | All bit-identical |
+
+The final CUDA workflow retains input construction, numerical finishing and
+conditional selection on the Mac. In the initial wider comparison, a few
+macro moments and direct objectives differed in their last bits. Local Fortran
+finishing resolved those differences; they are not hidden behind a tolerance.
+The [verification report](cuda-validation-v020.md) and
+[structured evidence](../results/cuda-coverage-v020.json) describe the exact
+point set, independent CPU execution, saved-output reuse and final GPU rerun.
+Numerical equality over this finite set does not establish a domain theorem.
+
+## Historical CPU evidence
+
 The comparisons below are existing results for the RE and DE numerical
 implementations. They use fixed inputs and the recorded CPU/compiler
-environment. No new numerical evaluation was run to prepare this package.
+environment. These historical CPU comparisons were reused without rerunning
+them; new CUDA pipeline checks are documented separately above.
 
 ## Recorded agreement
 
